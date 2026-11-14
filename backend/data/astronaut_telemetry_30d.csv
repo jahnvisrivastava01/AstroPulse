@@ -1,0 +1,481 @@
+mission_day,hour,astronaut_id,name,role,heart_rate_bpm,hrv_ms,spo2_pct,core_temp_c,radiation_msv_hr,cumulative_rad_msv,sleep_hours,cabin_co2_mmhg,readiness_score,anomaly_flag
+1,0,AST-01,Cmdr. Elena Vance,Mission Commander,63.7,67.3,98.8,37.03,0.47,12.12,7.3,4.1,100,0
+1,6,AST-01,Cmdr. Elena Vance,Mission Commander,60.0,65.4,98.3,36.66,0.53,12.25,6.1,3.63,98,0
+1,12,AST-01,Cmdr. Elena Vance,Mission Commander,58.5,69.6,98.1,36.59,0.52,12.38,6.7,3.98,100,0
+1,18,AST-01,Cmdr. Elena Vance,Mission Commander,71.0,70.0,98.5,36.72,0.48,12.5,6.7,3.71,100,0
+2,0,AST-01,Cmdr. Elena Vance,Mission Commander,59.9,77.3,98.5,36.64,0.46,12.62,7.0,3.92,100,0
+2,6,AST-01,Cmdr. Elena Vance,Mission Commander,57.6,73.5,99.6,36.98,0.48,12.74,7.5,3.85,100,0
+2,12,AST-01,Cmdr. Elena Vance,Mission Commander,61.6,66.5,97.9,36.69,0.57,12.88,6.3,3.54,99,0
+2,18,AST-01,Cmdr. Elena Vance,Mission Commander,58.0,68.7,98.7,36.93,0.56,13.02,6.6,3.71,100,0
+3,0,AST-01,Cmdr. Elena Vance,Mission Commander,63.2,72.9,98.3,36.77,0.5,13.14,7.8,3.53,100,0
+3,6,AST-01,Cmdr. Elena Vance,Mission Commander,64.9,69.5,98.1,36.79,0.56,13.28,7.3,4.26,100,0
+3,12,AST-01,Cmdr. Elena Vance,Mission Commander,61.9,75.8,97.5,36.92,0.45,13.39,6.2,4.11,98,0
+3,18,AST-01,Cmdr. Elena Vance,Mission Commander,65.2,68.1,98.3,36.58,0.56,13.53,6.6,3.65,100,0
+4,0,AST-01,Cmdr. Elena Vance,Mission Commander,65.2,69.6,98.3,36.88,0.58,13.68,7.9,3.85,100,0
+4,6,AST-01,Cmdr. Elena Vance,Mission Commander,60.9,71.4,98.4,36.74,0.51,13.81,7.3,3.88,100,0
+4,12,AST-01,Cmdr. Elena Vance,Mission Commander,62.0,66.8,97.9,36.74,0.47,13.93,7.4,3.75,100,0
+4,18,AST-01,Cmdr. Elena Vance,Mission Commander,62.8,57.9,98.1,37.01,0.6,14.08,5.9,3.79,97,0
+5,0,AST-01,Cmdr. Elena Vance,Mission Commander,62.2,80.3,98.4,36.85,0.47,14.2,7.3,3.8,100,0
+5,6,AST-01,Cmdr. Elena Vance,Mission Commander,64.7,62.3,98.2,36.92,0.56,14.34,7.9,3.38,100,0
+5,12,AST-01,Cmdr. Elena Vance,Mission Commander,64.1,79.0,98.1,36.72,0.46,14.46,8.1,4.06,100,0
+5,18,AST-01,Cmdr. Elena Vance,Mission Commander,62.0,66.2,98.8,36.62,0.48,14.58,6.5,4.26,100,0
+6,0,AST-01,Cmdr. Elena Vance,Mission Commander,59.3,66.4,98.8,36.62,0.57,14.72,7.9,4.56,100,0
+6,6,AST-01,Cmdr. Elena Vance,Mission Commander,60.9,67.0,97.9,36.98,0.5,14.84,7.4,3.89,100,0
+6,12,AST-01,Cmdr. Elena Vance,Mission Commander,62.9,69.7,98.2,36.83,0.47,14.96,7.2,4.05,100,0
+6,18,AST-01,Cmdr. Elena Vance,Mission Commander,62.6,61.9,98.9,37.0,0.48,15.08,6.5,4.04,100,0
+7,0,AST-01,Cmdr. Elena Vance,Mission Commander,66.1,63.9,98.9,36.86,0.55,15.22,6.6,3.84,100,0
+7,6,AST-01,Cmdr. Elena Vance,Mission Commander,57.2,64.1,98.9,36.76,0.54,15.36,7.1,4.24,100,0
+7,12,AST-01,Cmdr. Elena Vance,Mission Commander,61.1,81.6,98.8,36.67,0.49,15.48,7.1,3.76,100,0
+7,18,AST-01,Cmdr. Elena Vance,Mission Commander,61.6,71.7,98.3,36.92,0.51,15.61,6.8,4.06,100,0
+8,0,AST-01,Cmdr. Elena Vance,Mission Commander,62.7,61.8,98.6,36.86,0.54,15.74,7.2,3.56,100,0
+8,6,AST-01,Cmdr. Elena Vance,Mission Commander,65.7,68.3,98.8,36.96,0.56,15.88,6.3,3.52,99,0
+8,12,AST-01,Cmdr. Elena Vance,Mission Commander,63.8,70.6,98.7,37.38,0.57,16.02,7.9,4.1,100,0
+8,18,AST-01,Cmdr. Elena Vance,Mission Commander,62.8,68.9,98.0,36.57,0.46,16.13,6.8,3.82,100,0
+9,0,AST-01,Cmdr. Elena Vance,Mission Commander,70.1,58.7,98.8,36.56,0.45,16.24,6.6,3.7,100,0
+9,6,AST-01,Cmdr. Elena Vance,Mission Commander,67.5,68.6,98.7,36.61,0.46,16.35,7.1,3.6,100,0
+9,12,AST-01,Cmdr. Elena Vance,Mission Commander,69.5,71.2,97.7,36.83,0.57,16.49,6.8,3.3,100,0
+9,18,AST-01,Cmdr. Elena Vance,Mission Commander,59.3,76.3,98.4,36.75,0.49,16.61,8.2,3.92,100,0
+10,0,AST-01,Cmdr. Elena Vance,Mission Commander,57.6,72.6,99.3,36.95,0.51,16.74,6.7,3.42,100,0
+10,6,AST-01,Cmdr. Elena Vance,Mission Commander,61.2,77.4,98.5,36.66,0.52,16.87,6.9,3.43,100,0
+10,12,AST-01,Cmdr. Elena Vance,Mission Commander,67.7,60.8,98.3,36.82,0.51,17.0,7.1,4.5,100,0
+10,18,AST-01,Cmdr. Elena Vance,Mission Commander,63.4,72.5,98.4,36.81,0.54,17.14,7.2,4.0,100,0
+11,0,AST-01,Cmdr. Elena Vance,Mission Commander,67.6,61.8,99.4,36.51,0.59,17.29,7.4,3.77,100,0
+11,6,AST-01,Cmdr. Elena Vance,Mission Commander,60.3,69.0,98.9,36.73,0.45,17.4,6.7,4.05,100,0
+11,12,AST-01,Cmdr. Elena Vance,Mission Commander,63.2,64.5,98.9,36.85,0.56,17.54,6.7,4.06,100,0
+11,18,AST-01,Cmdr. Elena Vance,Mission Commander,63.9,64.4,97.8,36.62,0.57,17.68,7.4,3.74,100,0
+12,0,AST-01,Cmdr. Elena Vance,Mission Commander,61.2,73.5,98.8,36.92,0.47,17.8,7.1,4.08,100,0
+12,6,AST-01,Cmdr. Elena Vance,Mission Commander,60.2,72.7,98.4,36.93,0.45,17.91,7.3,3.76,100,0
+12,12,AST-01,Cmdr. Elena Vance,Mission Commander,62.3,71.0,98.2,37.11,0.49,18.03,7.8,3.44,100,0
+12,18,AST-01,Cmdr. Elena Vance,Mission Commander,64.7,71.3,98.2,36.8,0.53,18.16,7.7,3.76,100,0
+13,0,AST-01,Cmdr. Elena Vance,Mission Commander,59.1,66.4,98.7,36.72,0.54,18.3,6.8,3.86,100,0
+13,6,AST-01,Cmdr. Elena Vance,Mission Commander,64.0,72.4,99.0,36.73,0.59,18.45,6.7,3.74,100,0
+13,12,AST-01,Cmdr. Elena Vance,Mission Commander,63.1,75.4,98.8,36.78,0.47,18.57,6.9,3.8,100,0
+13,18,AST-01,Cmdr. Elena Vance,Mission Commander,59.6,67.8,99.0,36.92,0.54,18.71,7.0,3.92,100,0
+14,0,AST-01,Cmdr. Elena Vance,Mission Commander,64.4,66.0,98.6,36.8,0.46,18.82,7.4,3.82,100,0
+14,6,AST-01,Cmdr. Elena Vance,Mission Commander,70.0,70.0,98.3,37.08,0.54,18.96,7.6,3.86,100,0
+14,12,AST-01,Cmdr. Elena Vance,Mission Commander,69.7,64.0,98.2,36.71,0.52,19.09,7.7,3.26,100,0
+14,18,AST-01,Cmdr. Elena Vance,Mission Commander,55.3,69.8,98.7,36.95,0.47,19.21,6.3,4.35,99,0
+15,0,AST-01,Cmdr. Elena Vance,Mission Commander,66.1,65.7,97.8,37.0,0.6,19.36,7.3,3.88,100,0
+15,6,AST-01,Cmdr. Elena Vance,Mission Commander,53.4,63.5,98.5,36.79,0.58,19.5,7.1,3.81,100,0
+15,12,AST-01,Cmdr. Elena Vance,Mission Commander,60.4,71.1,98.1,36.78,0.59,19.65,6.3,3.96,99,0
+15,18,AST-01,Cmdr. Elena Vance,Mission Commander,65.7,75.7,98.2,36.75,0.55,19.79,8.0,3.83,100,0
+16,0,AST-01,Cmdr. Elena Vance,Mission Commander,66.1,68.3,99.3,37.06,0.58,19.93,6.5,3.72,100,0
+16,6,AST-01,Cmdr. Elena Vance,Mission Commander,67.2,72.4,98.3,36.75,0.45,20.04,7.7,3.27,100,0
+16,12,AST-01,Cmdr. Elena Vance,Mission Commander,57.9,57.8,98.4,36.91,0.53,20.17,6.8,4.2,100,0
+16,18,AST-01,Cmdr. Elena Vance,Mission Commander,65.4,69.7,98.5,36.92,0.49,20.29,7.3,3.79,100,0
+17,0,AST-01,Cmdr. Elena Vance,Mission Commander,54.8,67.6,98.0,36.9,0.46,20.4,6.4,3.95,99,0
+17,6,AST-01,Cmdr. Elena Vance,Mission Commander,64.6,66.5,99.3,36.75,0.48,20.52,6.8,3.56,100,0
+17,12,AST-01,Cmdr. Elena Vance,Mission Commander,61.6,62.8,98.3,36.62,0.53,20.65,7.0,3.81,100,0
+17,18,AST-01,Cmdr. Elena Vance,Mission Commander,63.8,74.0,98.8,36.71,0.56,20.79,6.8,3.63,100,0
+18,0,AST-01,Cmdr. Elena Vance,Mission Commander,61.0,56.5,97.9,37.01,0.52,20.92,7.6,3.5,100,0
+18,6,AST-01,Cmdr. Elena Vance,Mission Commander,62.1,72.8,98.1,36.81,0.52,21.05,6.1,3.86,98,0
+18,12,AST-01,Cmdr. Elena Vance,Mission Commander,59.4,60.9,98.2,36.64,0.47,21.17,7.2,4.07,100,0
+18,18,AST-01,Cmdr. Elena Vance,Mission Commander,65.7,71.3,98.2,36.8,0.53,21.3,8.0,3.96,100,0
+19,0,AST-01,Cmdr. Elena Vance,Mission Commander,58.4,67.0,98.1,36.59,0.55,21.44,6.0,4.08,97,0
+19,6,AST-01,Cmdr. Elena Vance,Mission Commander,62.1,68.6,98.4,36.76,0.47,21.56,6.7,3.65,100,0
+19,12,AST-01,Cmdr. Elena Vance,Mission Commander,73.9,48.7,97.4,36.98,4.31,22.64,6.5,3.77,75,1
+19,18,AST-01,Cmdr. Elena Vance,Mission Commander,76.8,54.4,97.1,37.02,4.35,23.73,6.4,4.03,79,1
+20,0,AST-01,Cmdr. Elena Vance,Mission Commander,56.2,70.7,98.2,36.89,0.5,23.86,7.3,2.98,100,0
+20,6,AST-01,Cmdr. Elena Vance,Mission Commander,60.4,66.5,97.9,36.92,0.54,24.0,7.1,3.44,100,0
+20,12,AST-01,Cmdr. Elena Vance,Mission Commander,73.7,53.2,97.1,37.04,4.26,25.06,5.9,4.03,76,1
+20,18,AST-01,Cmdr. Elena Vance,Mission Commander,79.9,56.9,97.1,37.47,4.31,26.14,6.6,3.74,79,1
+21,0,AST-01,Cmdr. Elena Vance,Mission Commander,63.3,65.0,98.5,36.78,0.54,26.28,7.0,3.83,100,0
+21,6,AST-01,Cmdr. Elena Vance,Mission Commander,59.9,70.9,98.4,36.75,0.57,26.42,7.3,4.42,100,0
+21,12,AST-01,Cmdr. Elena Vance,Mission Commander,65.0,66.4,99.0,36.74,0.52,26.55,6.7,3.13,100,0
+21,18,AST-01,Cmdr. Elena Vance,Mission Commander,65.7,63.8,97.9,36.8,0.58,26.7,7.6,3.14,100,0
+22,0,AST-01,Cmdr. Elena Vance,Mission Commander,62.8,71.9,97.9,36.97,0.47,26.82,7.4,4.17,100,0
+22,6,AST-01,Cmdr. Elena Vance,Mission Commander,65.4,68.4,98.3,36.86,0.5,26.94,7.6,3.54,100,0
+22,12,AST-01,Cmdr. Elena Vance,Mission Commander,62.3,65.6,98.7,36.85,0.5,27.06,7.9,3.67,100,0
+22,18,AST-01,Cmdr. Elena Vance,Mission Commander,60.5,65.2,98.9,36.95,0.55,27.2,7.3,4.36,100,0
+23,0,AST-01,Cmdr. Elena Vance,Mission Commander,59.3,61.8,97.8,37.02,0.52,27.33,7.2,4.59,100,0
+23,6,AST-01,Cmdr. Elena Vance,Mission Commander,61.3,68.2,99.2,36.89,0.59,27.48,6.6,3.94,100,0
+23,12,AST-01,Cmdr. Elena Vance,Mission Commander,68.6,74.7,99.1,36.72,0.59,27.63,7.0,4.03,100,0
+23,18,AST-01,Cmdr. Elena Vance,Mission Commander,70.9,70.6,98.3,36.78,0.5,27.76,6.5,3.3,100,0
+24,0,AST-01,Cmdr. Elena Vance,Mission Commander,64.9,68.4,98.0,36.61,0.56,27.9,6.2,3.72,98,0
+24,6,AST-01,Cmdr. Elena Vance,Mission Commander,58.1,67.3,98.5,36.6,0.51,28.03,7.0,4.01,100,0
+24,12,AST-01,Cmdr. Elena Vance,Mission Commander,68.5,73.6,98.4,36.63,0.46,28.14,7.1,3.85,100,0
+24,18,AST-01,Cmdr. Elena Vance,Mission Commander,59.6,68.7,98.2,36.9,0.58,28.28,6.8,3.64,100,0
+25,0,AST-01,Cmdr. Elena Vance,Mission Commander,72.9,47.3,98.2,36.82,0.57,28.42,5.8,3.0,91,0
+25,6,AST-01,Cmdr. Elena Vance,Mission Commander,65.7,43.8,98.0,36.83,0.48,28.54,4.2,3.57,80,0
+25,12,AST-01,Cmdr. Elena Vance,Mission Commander,69.1,58.8,98.9,36.99,0.45,28.65,4.6,3.58,90,0
+25,18,AST-01,Cmdr. Elena Vance,Mission Commander,73.3,49.3,98.7,36.64,0.49,28.77,4.9,3.69,87,0
+26,0,AST-01,Cmdr. Elena Vance,Mission Commander,75.5,52.2,98.4,36.97,0.55,28.91,4.6,3.52,88,0
+26,6,AST-01,Cmdr. Elena Vance,Mission Commander,67.2,58.8,98.0,36.68,0.51,29.04,4.1,3.98,87,0
+26,12,AST-01,Cmdr. Elena Vance,Mission Commander,68.5,58.8,97.7,37.05,0.49,29.16,5.6,3.79,95,0
+26,18,AST-01,Cmdr. Elena Vance,Mission Commander,71.8,56.7,99.4,36.9,0.49,29.28,5.1,3.74,92,0
+27,0,AST-01,Cmdr. Elena Vance,Mission Commander,73.1,51.7,98.3,36.68,0.45,29.39,4.0,3.97,84,0
+27,6,AST-01,Cmdr. Elena Vance,Mission Commander,80.0,53.6,98.3,36.88,0.45,29.5,5.2,4.09,92,0
+27,12,AST-01,Cmdr. Elena Vance,Mission Commander,78.8,55.1,97.8,36.61,0.53,29.63,4.8,3.86,91,0
+27,18,AST-01,Cmdr. Elena Vance,Mission Commander,68.0,52.9,97.9,36.68,0.5,29.76,4.4,4.12,87,0
+28,0,AST-01,Cmdr. Elena Vance,Mission Commander,69.7,63.2,98.7,36.83,0.56,29.9,5.4,3.34,94,0
+28,6,AST-01,Cmdr. Elena Vance,Mission Commander,73.0,46.7,97.8,36.95,0.57,30.04,5.0,4.33,86,0
+28,12,AST-01,Cmdr. Elena Vance,Mission Commander,70.8,59.1,98.8,36.72,0.57,30.18,4.3,4.08,88,0
+28,18,AST-01,Cmdr. Elena Vance,Mission Commander,66.8,55.7,98.0,36.77,0.53,30.31,5.2,3.98,93,0
+29,0,AST-01,Cmdr. Elena Vance,Mission Commander,75.0,55.4,98.8,36.87,0.49,30.43,4.1,3.78,87,0
+29,6,AST-01,Cmdr. Elena Vance,Mission Commander,75.9,50.7,98.7,36.77,0.6,30.58,5.0,4.0,89,0
+29,12,AST-01,Cmdr. Elena Vance,Mission Commander,73.1,50.1,98.9,36.72,0.46,30.69,4.2,3.95,84,0
+29,18,AST-01,Cmdr. Elena Vance,Mission Commander,69.4,56.4,98.4,36.82,0.5,30.82,5.9,3.86,97,0
+30,0,AST-01,Cmdr. Elena Vance,Mission Commander,76.6,42.6,98.6,36.93,0.48,30.94,5.4,3.81,85,0
+30,6,AST-01,Cmdr. Elena Vance,Mission Commander,77.3,46.6,98.3,36.43,0.54,31.08,4.7,4.24,84,0
+30,12,AST-01,Cmdr. Elena Vance,Mission Commander,78.5,47.4,98.3,36.76,0.5,31.2,4.4,3.48,83,0
+30,18,AST-01,Cmdr. Elena Vance,Mission Commander,66.2,44.0,98.1,36.9,0.59,31.35,5.6,3.74,87,0
+1,0,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,57.8,77.4,98.6,36.76,0.6,12.15,7.8,4.29,100,0
+1,6,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,52.5,74.4,98.8,36.61,0.48,12.27,6.7,4.16,100,0
+1,12,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,63.0,71.1,98.7,36.77,0.57,12.41,6.7,3.59,100,0
+1,18,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,66.3,78.7,98.7,36.72,0.58,12.56,6.7,3.68,100,0
+2,0,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,59.0,75.7,99.3,37.0,0.46,12.68,6.1,3.42,98,0
+2,6,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,61.1,69.2,98.7,36.7,0.48,12.8,6.8,3.87,100,0
+2,12,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,57.9,79.9,100.0,36.62,0.57,12.94,7.9,3.46,100,0
+2,18,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,52.3,76.3,99.1,36.75,0.55,13.08,7.6,3.95,100,0
+3,0,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,61.7,79.8,99.6,36.8,0.47,13.2,6.9,3.55,100,0
+3,6,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,55.6,76.5,99.2,36.76,0.53,13.33,7.2,3.81,100,0
+3,12,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,53.2,77.7,99.3,37.02,0.57,13.47,7.3,3.68,100,0
+3,18,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,59.9,74.2,99.5,36.48,0.59,13.62,6.8,3.86,100,0
+4,0,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,61.8,68.9,99.1,36.59,0.5,13.74,6.8,3.84,100,0
+4,6,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,59.3,71.4,98.9,36.39,0.57,13.88,6.8,4.36,100,0
+4,12,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,52.9,63.0,99.2,36.62,0.55,14.02,7.8,4.19,100,0
+4,18,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,57.2,68.3,99.0,36.79,0.55,14.16,6.2,3.59,98,0
+5,0,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,57.8,75.2,98.9,36.75,0.48,14.28,7.1,3.73,100,0
+5,6,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,61.3,72.3,99.2,36.7,0.48,14.4,7.3,3.94,100,0
+5,12,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,60.0,76.2,99.3,36.9,0.47,14.52,7.8,3.95,100,0
+5,18,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,54.4,73.8,99.1,36.59,0.51,14.65,7.1,3.37,100,0
+6,0,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,58.4,70.6,99.3,36.6,0.5,14.78,6.9,3.79,100,0
+6,6,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,57.4,70.6,100.0,36.63,0.49,14.9,7.6,3.93,100,0
+6,12,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,54.6,73.8,99.0,36.53,0.54,15.04,7.4,4.33,100,0
+6,18,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,54.9,74.2,98.9,36.69,0.46,15.16,6.5,3.72,100,0
+7,0,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,64.3,77.2,98.8,36.79,0.48,15.28,7.3,3.56,100,0
+7,6,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,64.3,75.8,99.2,36.8,0.57,15.42,7.7,3.64,100,0
+7,12,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,62.6,75.0,99.8,36.6,0.53,15.55,6.9,3.86,100,0
+7,18,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,54.4,71.4,99.2,36.87,0.52,15.68,8.1,3.93,100,0
+8,0,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,58.1,74.6,99.2,36.55,0.46,15.8,7.8,3.77,100,0
+8,6,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,61.3,78.4,98.3,36.56,0.51,15.93,7.2,4.11,100,0
+8,12,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,63.9,71.7,99.4,36.69,0.59,16.08,6.1,3.63,98,0
+8,18,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,60.8,74.9,99.2,36.51,0.54,16.22,6.7,3.92,100,0
+9,0,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,59.7,75.3,98.8,36.6,0.6,16.37,7.3,3.71,100,0
+9,6,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,52.2,73.7,98.9,36.86,0.53,16.5,7.8,3.28,100,0
+9,12,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,56.7,68.4,98.5,36.87,0.57,16.64,6.2,3.72,98,0
+9,18,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,50.7,75.3,98.9,36.89,0.49,16.76,8.0,4.06,100,0
+10,0,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,56.8,72.3,98.9,37.01,0.58,16.9,7.3,4.19,100,0
+10,6,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,56.9,75.9,98.9,36.62,0.46,17.01,7.5,3.82,100,0
+10,12,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,60.6,73.6,99.0,36.4,0.46,17.12,7.2,3.94,100,0
+10,18,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,57.5,79.4,98.2,37.14,0.55,17.26,7.8,3.49,100,0
+11,0,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,60.1,68.7,98.8,36.99,0.58,17.4,7.4,3.52,100,0
+11,6,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,57.9,84.0,99.4,36.75,0.54,17.54,7.8,4.16,100,0
+11,12,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,60.2,68.3,99.7,36.53,0.47,17.66,7.7,3.72,100,0
+11,18,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,59.2,81.2,99.2,36.75,0.51,17.79,7.8,3.43,100,0
+12,0,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,60.1,77.5,98.9,36.91,0.57,17.93,7.2,3.49,100,0
+12,6,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,53.5,65.8,98.6,36.93,0.52,18.06,6.7,3.4,100,0
+12,12,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,63.7,79.0,98.7,37.04,0.51,18.19,7.1,4.14,100,0
+12,18,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,56.4,73.9,98.5,36.47,0.51,18.32,7.7,4.53,100,0
+13,0,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,62.8,76.8,99.2,36.83,0.59,18.47,6.9,3.92,100,0
+13,6,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,57.3,76.8,99.0,36.56,0.49,18.59,6.5,3.47,100,0
+13,12,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,58.6,81.0,99.4,36.46,0.56,18.73,6.7,3.32,100,0
+13,18,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,57.5,73.2,98.6,36.78,0.53,18.86,6.7,3.9,100,0
+14,0,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,52.4,76.2,99.0,36.78,0.57,19.0,6.8,3.82,100,0
+14,6,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,59.7,74.7,99.5,36.76,0.58,19.14,6.7,3.6,100,0
+14,12,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,53.1,82.7,98.5,36.6,0.57,19.28,7.6,3.63,100,0
+14,18,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,64.4,69.9,99.1,36.58,0.52,19.41,6.4,3.89,99,0
+15,0,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,60.2,76.1,98.9,36.68,0.45,19.52,7.8,4.29,100,0
+15,6,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,52.6,75.3,99.6,36.45,0.52,19.65,6.6,4.29,100,0
+15,12,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,63.9,71.2,99.2,36.94,0.49,19.77,6.4,3.59,99,0
+15,18,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,55.9,73.0,98.7,36.71,0.57,19.91,7.2,3.33,100,0
+16,0,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,59.2,78.2,98.2,36.76,0.5,20.04,7.5,4.38,100,0
+16,6,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,57.1,82.6,99.0,36.6,0.59,20.19,7.4,3.52,100,0
+16,12,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,58.6,66.9,99.0,36.56,0.56,20.33,7.9,3.44,100,0
+16,18,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,56.1,67.0,99.0,36.82,0.58,20.47,8.5,3.92,100,0
+17,0,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,58.7,72.5,99.1,36.68,0.57,20.61,6.5,3.53,100,0
+17,6,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,55.5,72.8,99.0,36.81,0.5,20.74,6.4,3.15,99,0
+17,12,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,59.4,86.5,99.0,36.83,0.6,20.89,6.9,3.94,100,0
+17,18,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,56.5,79.8,99.2,36.79,0.5,21.02,7.0,3.57,100,0
+18,0,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,59.9,69.5,99.0,36.7,0.55,21.16,7.0,3.86,100,0
+18,6,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,66.6,72.5,98.7,36.78,0.53,21.29,6.5,3.71,100,0
+18,12,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,55.9,73.1,99.0,36.78,0.59,21.44,6.0,3.61,97,0
+18,18,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,47.9,75.5,99.1,36.58,0.48,21.56,8.0,4.17,100,0
+19,0,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,57.3,81.5,99.1,36.65,0.6,21.71,6.8,3.68,100,0
+19,6,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,56.7,70.5,99.1,36.61,0.46,21.82,7.2,3.8,100,0
+19,12,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,73.5,65.0,98.3,36.78,4.33,22.9,5.7,3.74,75,1
+19,18,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,71.6,63.9,97.7,36.82,4.31,23.98,6.6,4.03,80,1
+20,0,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,56.0,61.0,98.8,36.76,0.53,24.11,6.5,3.79,100,0
+20,6,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,51.1,84.3,98.5,36.69,0.5,24.24,7.0,4.31,100,0
+20,12,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,67.2,50.9,98.5,36.97,4.38,25.33,7.0,3.46,76,1
+20,18,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,66.4,57.0,97.9,37.14,4.35,26.42,6.7,3.89,80,1
+21,0,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,62.6,81.8,99.0,36.59,0.47,26.54,7.2,4.32,100,0
+21,6,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,57.2,74.5,99.1,36.63,0.46,26.65,6.3,3.51,99,0
+21,12,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,62.2,70.7,98.6,36.78,0.48,26.77,7.3,3.59,100,0
+21,18,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,55.3,78.4,99.2,36.9,0.51,26.9,6.9,3.72,100,0
+22,0,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,62.6,76.8,99.2,37.02,0.46,27.01,8.0,4.34,100,0
+22,6,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,60.6,77.0,98.7,36.75,0.5,27.14,6.5,3.21,100,0
+22,12,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,65.2,68.5,98.9,36.66,0.58,27.28,6.3,4.07,99,0
+22,18,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,59.1,75.3,99.3,36.58,0.52,27.41,7.4,4.02,100,0
+23,0,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,60.3,79.9,99.1,36.51,0.6,27.56,7.0,3.77,100,0
+23,6,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,60.8,76.9,99.0,36.48,0.58,27.7,7.3,4.31,100,0
+23,12,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,58.8,87.0,99.2,36.44,0.55,27.84,7.3,4.07,100,0
+23,18,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,55.8,76.4,98.9,36.7,0.49,27.96,7.0,3.54,100,0
+24,0,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,56.0,76.9,99.7,36.76,0.54,28.1,6.8,3.47,100,0
+24,6,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,59.0,81.3,98.4,36.53,0.47,28.22,7.5,3.69,100,0
+24,12,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,64.0,72.0,99.1,36.84,0.51,28.35,8.1,3.57,100,0
+24,18,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,62.1,71.1,99.1,36.57,0.52,28.48,6.8,3.86,100,0
+25,0,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,63.4,84.0,99.8,36.88,0.55,28.62,6.7,4.05,100,0
+25,6,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,58.0,80.6,99.4,36.6,0.56,28.76,7.2,4.24,100,0
+25,12,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,54.0,73.0,98.7,36.42,0.46,28.88,7.4,3.39,100,0
+25,18,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,58.7,76.9,99.7,36.54,0.57,29.02,7.0,3.51,100,0
+26,0,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,56.7,79.4,99.8,36.93,0.48,29.14,6.3,3.45,99,0
+26,6,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,56.2,77.9,98.2,36.73,0.59,29.29,6.8,3.32,100,0
+26,12,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,59.8,71.3,98.5,36.27,0.47,29.41,7.2,3.69,100,0
+26,18,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,48.0,73.2,99.4,36.82,0.47,29.53,6.5,3.89,100,0
+27,0,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,60.7,80.1,99.0,36.67,0.49,29.65,7.3,3.73,100,0
+27,6,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,55.1,69.4,98.9,36.94,0.57,29.79,7.1,3.58,100,0
+27,12,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,49.5,78.4,99.3,36.66,0.45,29.9,7.2,3.83,100,0
+27,18,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,60.5,74.5,99.0,36.61,0.49,30.02,7.6,3.42,100,0
+28,0,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,59.0,67.2,99.2,36.69,0.54,30.16,6.6,3.71,100,0
+28,6,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,56.5,71.3,99.3,36.63,0.53,30.29,6.5,3.82,100,0
+28,12,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,59.5,77.5,99.1,36.64,0.53,30.42,7.1,3.55,100,0
+28,18,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,53.6,73.7,98.8,37.0,0.51,30.55,7.5,4.42,100,0
+29,0,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,58.1,70.4,98.9,36.91,0.46,30.66,6.7,3.98,100,0
+29,6,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,55.5,71.4,99.5,36.58,0.53,30.79,7.3,3.72,100,0
+29,12,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,57.0,66.2,99.4,36.69,0.53,30.92,6.5,3.8,100,0
+29,18,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,61.6,76.5,99.5,36.61,0.59,31.07,7.2,3.37,100,0
+30,0,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,61.2,70.7,99.7,36.86,0.57,31.21,7.6,3.74,100,0
+30,6,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,53.7,74.6,99.4,36.8,0.5,31.34,6.9,3.68,100,0
+30,12,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,54.7,76.1,99.8,36.54,0.46,31.46,7.2,3.87,100,0
+30,18,AST-02,Dr. Kenji Sato,Flight Engineer & Biologist,59.8,74.0,99.1,36.69,0.55,31.6,6.5,3.93,100,0
+1,0,AST-03,Maj. Marcus Thorne,EVA Specialist,64.3,68.9,98.7,37.29,0.56,12.14,6.6,3.98,100,0
+1,6,AST-03,Maj. Marcus Thorne,EVA Specialist,65.9,65.5,98.9,36.95,0.5,12.26,7.9,3.76,100,0
+1,12,AST-03,Maj. Marcus Thorne,EVA Specialist,57.6,61.0,98.7,36.9,0.5,12.38,7.4,3.55,100,0
+1,18,AST-03,Maj. Marcus Thorne,EVA Specialist,63.0,61.9,97.9,36.6,0.56,12.52,7.8,4.26,100,0
+2,0,AST-03,Maj. Marcus Thorne,EVA Specialist,68.5,61.8,98.4,36.9,0.55,12.66,7.3,3.56,100,0
+2,6,AST-03,Maj. Marcus Thorne,EVA Specialist,69.2,58.4,98.0,36.98,0.58,12.8,7.6,3.4,100,0
+2,12,AST-03,Maj. Marcus Thorne,EVA Specialist,65.4,73.7,97.8,36.8,0.45,12.91,7.7,3.4,100,0
+2,18,AST-03,Maj. Marcus Thorne,EVA Specialist,67.5,67.3,97.7,37.03,0.59,13.06,7.5,4.37,100,0
+3,0,AST-03,Maj. Marcus Thorne,EVA Specialist,64.5,59.1,98.6,36.88,0.53,13.19,7.3,3.78,100,0
+3,6,AST-03,Maj. Marcus Thorne,EVA Specialist,64.3,59.3,98.1,36.96,0.58,13.34,7.4,3.72,100,0
+3,12,AST-03,Maj. Marcus Thorne,EVA Specialist,67.6,67.1,97.8,37.06,0.57,13.48,7.5,3.68,100,0
+3,18,AST-03,Maj. Marcus Thorne,EVA Specialist,66.2,60.8,97.8,36.91,0.49,13.6,7.1,3.71,100,0
+4,0,AST-03,Maj. Marcus Thorne,EVA Specialist,67.8,55.9,97.8,36.74,0.56,13.74,7.4,4.07,100,0
+4,6,AST-03,Maj. Marcus Thorne,EVA Specialist,68.2,65.1,98.5,36.8,0.46,13.86,7.1,4.15,100,0
+4,12,AST-03,Maj. Marcus Thorne,EVA Specialist,61.8,65.2,98.6,36.98,0.58,14.0,7.5,4.61,100,0
+4,18,AST-03,Maj. Marcus Thorne,EVA Specialist,58.7,60.6,98.8,36.85,0.54,14.14,7.0,4.09,100,0
+5,0,AST-03,Maj. Marcus Thorne,EVA Specialist,70.6,70.6,98.9,37.01,0.49,14.26,6.5,3.81,100,0
+5,6,AST-03,Maj. Marcus Thorne,EVA Specialist,64.1,52.0,98.4,36.92,0.54,14.4,7.1,4.31,98,0
+5,12,AST-03,Maj. Marcus Thorne,EVA Specialist,62.8,65.0,97.9,36.7,0.52,14.53,7.0,3.18,100,0
+5,18,AST-03,Maj. Marcus Thorne,EVA Specialist,66.6,57.8,97.8,36.8,0.53,14.66,6.9,3.57,100,0
+6,0,AST-03,Maj. Marcus Thorne,EVA Specialist,66.1,70.7,97.4,36.92,0.59,14.81,6.6,3.74,100,0
+6,6,AST-03,Maj. Marcus Thorne,EVA Specialist,61.9,65.3,98.2,36.58,0.58,14.96,8.2,3.78,100,0
+6,12,AST-03,Maj. Marcus Thorne,EVA Specialist,62.5,56.4,97.5,36.66,0.59,15.11,7.6,4.26,100,0
+6,18,AST-03,Maj. Marcus Thorne,EVA Specialist,68.2,61.3,98.3,36.81,0.55,15.25,6.9,3.53,100,0
+7,0,AST-03,Maj. Marcus Thorne,EVA Specialist,57.5,60.4,98.1,36.75,0.56,15.39,7.4,3.75,100,0
+7,6,AST-03,Maj. Marcus Thorne,EVA Specialist,69.3,69.8,98.7,36.64,0.45,15.5,7.5,3.87,100,0
+7,12,AST-03,Maj. Marcus Thorne,EVA Specialist,68.3,65.4,98.0,36.95,0.59,15.65,7.1,3.58,100,0
+7,18,AST-03,Maj. Marcus Thorne,EVA Specialist,59.1,60.8,99.3,36.83,0.46,15.76,7.2,3.49,100,0
+8,0,AST-03,Maj. Marcus Thorne,EVA Specialist,69.4,59.7,98.6,36.96,0.55,15.9,8.2,3.58,100,0
+8,6,AST-03,Maj. Marcus Thorne,EVA Specialist,61.7,58.5,98.1,37.12,0.57,16.04,7.3,3.88,100,0
+8,12,AST-03,Maj. Marcus Thorne,EVA Specialist,64.5,68.1,98.5,36.64,0.51,16.17,8.1,4.03,100,0
+8,18,AST-03,Maj. Marcus Thorne,EVA Specialist,61.5,71.4,98.1,36.72,0.47,16.29,6.9,4.03,100,0
+9,0,AST-03,Maj. Marcus Thorne,EVA Specialist,69.6,71.0,98.0,36.87,0.51,16.42,7.8,3.44,100,0
+9,6,AST-03,Maj. Marcus Thorne,EVA Specialist,59.3,70.4,99.0,36.83,0.47,16.54,6.8,3.8,100,0
+9,12,AST-03,Maj. Marcus Thorne,EVA Specialist,66.9,64.0,98.0,36.88,0.45,16.65,6.4,3.69,99,0
+9,18,AST-03,Maj. Marcus Thorne,EVA Specialist,58.7,62.2,98.2,36.93,0.58,16.79,7.8,3.91,100,0
+10,0,AST-03,Maj. Marcus Thorne,EVA Specialist,64.6,66.2,97.6,36.73,0.53,16.92,7.2,3.45,100,0
+10,6,AST-03,Maj. Marcus Thorne,EVA Specialist,70.5,65.3,98.1,37.08,0.5,17.05,6.6,3.61,100,0
+10,12,AST-03,Maj. Marcus Thorne,EVA Specialist,64.4,61.6,97.4,37.01,0.54,17.19,7.0,3.47,100,0
+10,18,AST-03,Maj. Marcus Thorne,EVA Specialist,64.3,75.7,98.3,37.03,0.54,17.33,6.4,3.95,99,0
+11,0,AST-03,Maj. Marcus Thorne,EVA Specialist,63.4,63.5,99.3,36.67,0.48,17.45,7.3,4.33,100,0
+11,6,AST-03,Maj. Marcus Thorne,EVA Specialist,63.7,65.4,97.9,37.03,0.58,17.6,7.3,3.79,100,0
+11,12,AST-03,Maj. Marcus Thorne,EVA Specialist,68.9,63.7,97.5,37.09,0.49,17.72,7.5,3.58,100,0
+11,18,AST-03,Maj. Marcus Thorne,EVA Specialist,65.8,51.9,99.3,36.86,0.58,17.86,7.1,3.89,98,0
+12,0,AST-03,Maj. Marcus Thorne,EVA Specialist,66.8,67.2,98.4,36.91,0.48,17.98,7.8,3.74,100,0
+12,6,AST-03,Maj. Marcus Thorne,EVA Specialist,64.5,69.0,99.1,36.93,0.59,18.13,7.1,3.68,100,0
+12,12,AST-03,Maj. Marcus Thorne,EVA Specialist,68.9,68.7,97.9,36.96,0.49,18.25,7.8,3.64,100,0
+12,18,AST-03,Maj. Marcus Thorne,EVA Specialist,61.9,60.6,98.0,37.03,0.45,18.36,7.5,3.95,100,0
+13,0,AST-03,Maj. Marcus Thorne,EVA Specialist,62.8,66.2,98.5,37.01,0.55,18.5,7.5,3.93,100,0
+13,6,AST-03,Maj. Marcus Thorne,EVA Specialist,62.3,65.1,97.9,36.9,0.51,18.63,6.7,3.76,100,0
+13,12,AST-03,Maj. Marcus Thorne,EVA Specialist,62.2,62.5,97.4,36.93,0.46,18.74,8.0,3.8,100,0
+13,18,AST-03,Maj. Marcus Thorne,EVA Specialist,64.4,64.4,98.1,36.79,0.49,18.86,6.6,3.52,100,0
+14,0,AST-03,Maj. Marcus Thorne,EVA Specialist,67.9,63.0,98.1,36.6,0.48,18.98,7.1,3.81,100,0
+14,6,AST-03,Maj. Marcus Thorne,EVA Specialist,59.2,70.0,97.9,36.95,0.58,19.12,5.3,3.86,93,0
+14,12,AST-03,Maj. Marcus Thorne,EVA Specialist,113.3,42.2,95.8,37.73,1.39,19.47,7.6,5.37,63,1
+14,18,AST-03,Maj. Marcus Thorne,EVA Specialist,65.8,70.8,97.7,36.91,0.57,19.61,7.1,3.27,100,0
+15,0,AST-03,Maj. Marcus Thorne,EVA Specialist,62.6,62.0,98.0,36.92,0.56,19.75,6.7,3.8,100,0
+15,6,AST-03,Maj. Marcus Thorne,EVA Specialist,68.3,58.8,97.9,37.07,0.47,19.87,6.3,3.55,99,0
+15,12,AST-03,Maj. Marcus Thorne,EVA Specialist,63.3,68.4,98.3,36.93,0.52,20.0,7.0,4.03,100,0
+15,18,AST-03,Maj. Marcus Thorne,EVA Specialist,64.8,73.9,98.8,36.7,0.56,20.14,7.7,4.17,100,0
+16,0,AST-03,Maj. Marcus Thorne,EVA Specialist,65.3,65.0,98.0,36.85,0.57,20.28,6.8,3.84,100,0
+16,6,AST-03,Maj. Marcus Thorne,EVA Specialist,66.4,63.4,97.1,36.9,0.52,20.41,6.8,3.43,100,0
+16,12,AST-03,Maj. Marcus Thorne,EVA Specialist,63.2,63.3,98.0,37.12,0.57,20.55,6.9,3.94,100,0
+16,18,AST-03,Maj. Marcus Thorne,EVA Specialist,63.7,74.5,98.1,36.95,0.55,20.69,6.2,4.05,98,0
+17,0,AST-03,Maj. Marcus Thorne,EVA Specialist,66.3,59.5,97.9,37.07,0.55,20.83,8.0,3.57,100,0
+17,6,AST-03,Maj. Marcus Thorne,EVA Specialist,65.7,63.3,97.8,36.69,0.46,20.94,7.1,3.5,100,0
+17,12,AST-03,Maj. Marcus Thorne,EVA Specialist,67.6,61.4,98.1,36.75,0.52,21.07,7.6,3.08,100,0
+17,18,AST-03,Maj. Marcus Thorne,EVA Specialist,64.7,64.1,98.4,36.89,0.53,21.2,6.4,4.13,99,0
+18,0,AST-03,Maj. Marcus Thorne,EVA Specialist,67.5,67.6,98.4,36.9,0.47,21.32,7.0,3.86,100,0
+18,6,AST-03,Maj. Marcus Thorne,EVA Specialist,68.4,60.3,97.3,36.94,0.51,21.45,7.2,3.82,100,0
+18,12,AST-03,Maj. Marcus Thorne,EVA Specialist,65.6,65.2,98.1,37.12,0.51,21.58,6.9,3.75,100,0
+18,18,AST-03,Maj. Marcus Thorne,EVA Specialist,62.4,60.0,98.9,36.88,0.52,21.71,7.1,3.87,100,0
+19,0,AST-03,Maj. Marcus Thorne,EVA Specialist,60.6,60.9,98.0,36.85,0.54,21.85,7.3,4.22,100,0
+19,6,AST-03,Maj. Marcus Thorne,EVA Specialist,66.1,62.2,97.7,37.14,0.55,21.99,6.6,3.42,100,0
+19,12,AST-03,Maj. Marcus Thorne,EVA Specialist,78.2,51.3,97.5,37.19,4.36,23.08,5.6,3.75,72,1
+19,18,AST-03,Maj. Marcus Thorne,EVA Specialist,79.1,51.9,97.1,36.96,4.35,24.17,6.2,3.69,76,1
+20,0,AST-03,Maj. Marcus Thorne,EVA Specialist,64.4,70.9,97.3,37.13,0.46,24.28,7.0,3.43,100,0
+20,6,AST-03,Maj. Marcus Thorne,EVA Specialist,66.6,65.9,98.2,36.95,0.49,24.4,8.3,3.39,100,0
+20,12,AST-03,Maj. Marcus Thorne,EVA Specialist,79.7,45.7,97.3,37.2,4.36,25.49,6.2,3.43,71,1
+20,18,AST-03,Maj. Marcus Thorne,EVA Specialist,75.6,53.2,97.7,37.38,4.27,26.56,7.2,3.91,79,1
+21,0,AST-03,Maj. Marcus Thorne,EVA Specialist,63.9,64.0,97.7,36.99,0.5,26.68,7.4,4.01,100,0
+21,6,AST-03,Maj. Marcus Thorne,EVA Specialist,64.5,59.6,98.2,36.83,0.55,26.82,6.9,3.61,100,0
+21,12,AST-03,Maj. Marcus Thorne,EVA Specialist,67.6,63.1,97.9,37.1,0.51,26.95,7.2,3.85,100,0
+21,18,AST-03,Maj. Marcus Thorne,EVA Specialist,65.4,66.9,98.7,36.81,0.49,27.07,5.9,4.07,97,0
+22,0,AST-03,Maj. Marcus Thorne,EVA Specialist,60.8,67.7,98.2,36.76,0.48,27.19,7.2,3.74,100,0
+22,6,AST-03,Maj. Marcus Thorne,EVA Specialist,59.6,73.9,98.4,37.3,0.56,27.33,6.6,3.4,100,0
+22,12,AST-03,Maj. Marcus Thorne,EVA Specialist,64.3,68.6,98.1,37.13,0.52,27.46,7.3,3.4,100,0
+22,18,AST-03,Maj. Marcus Thorne,EVA Specialist,63.1,58.9,98.1,36.97,0.46,27.58,5.5,3.86,94,0
+23,0,AST-03,Maj. Marcus Thorne,EVA Specialist,66.5,66.0,98.7,36.74,0.57,27.72,6.5,3.93,100,0
+23,6,AST-03,Maj. Marcus Thorne,EVA Specialist,65.4,69.3,98.0,36.65,0.46,27.83,7.3,3.65,100,0
+23,12,AST-03,Maj. Marcus Thorne,EVA Specialist,62.6,64.2,97.8,36.74,0.48,27.95,7.8,4.05,100,0
+23,18,AST-03,Maj. Marcus Thorne,EVA Specialist,64.1,69.7,97.8,36.72,0.56,28.09,6.8,3.94,100,0
+24,0,AST-03,Maj. Marcus Thorne,EVA Specialist,67.7,62.7,98.0,37.11,0.54,28.22,6.7,3.87,100,0
+24,6,AST-03,Maj. Marcus Thorne,EVA Specialist,71.3,65.9,98.4,36.81,0.54,28.36,7.5,3.35,100,0
+24,12,AST-03,Maj. Marcus Thorne,EVA Specialist,110.7,31.0,95.5,37.84,1.43,28.72,5.7,5.25,48,1
+24,18,AST-03,Maj. Marcus Thorne,EVA Specialist,68.8,69.0,98.5,36.89,0.55,28.86,7.5,3.93,100,0
+25,0,AST-03,Maj. Marcus Thorne,EVA Specialist,67.9,60.9,98.0,36.73,0.5,28.98,7.7,4.08,100,0
+25,6,AST-03,Maj. Marcus Thorne,EVA Specialist,67.2,64.4,97.2,36.89,0.47,29.1,7.5,4.05,100,0
+25,12,AST-03,Maj. Marcus Thorne,EVA Specialist,64.0,63.6,97.6,36.85,0.56,29.24,7.2,4.2,100,0
+25,18,AST-03,Maj. Marcus Thorne,EVA Specialist,71.4,64.2,98.1,36.94,0.57,29.38,5.8,4.13,96,0
+26,0,AST-03,Maj. Marcus Thorne,EVA Specialist,63.3,59.7,98.5,36.84,0.55,29.52,6.7,4.03,100,0
+26,6,AST-03,Maj. Marcus Thorne,EVA Specialist,68.9,73.7,98.2,36.8,0.49,29.64,6.5,3.39,100,0
+26,12,AST-03,Maj. Marcus Thorne,EVA Specialist,59.7,69.6,97.9,37.13,0.46,29.76,6.7,4.08,100,0
+26,18,AST-03,Maj. Marcus Thorne,EVA Specialist,71.3,60.7,98.0,36.88,0.51,29.89,7.2,3.95,100,0
+27,0,AST-03,Maj. Marcus Thorne,EVA Specialist,68.9,71.2,98.1,36.7,0.56,30.03,6.9,3.64,100,0
+27,6,AST-03,Maj. Marcus Thorne,EVA Specialist,63.2,55.7,97.7,36.91,0.6,30.18,7.0,3.52,100,0
+27,12,AST-03,Maj. Marcus Thorne,EVA Specialist,68.1,69.2,97.5,36.76,0.51,30.31,6.6,3.6,100,0
+27,18,AST-03,Maj. Marcus Thorne,EVA Specialist,58.9,63.4,98.6,36.71,0.6,30.46,6.7,3.85,100,0
+28,0,AST-03,Maj. Marcus Thorne,EVA Specialist,63.1,62.6,98.9,37.1,0.55,30.6,7.8,4.1,100,0
+28,6,AST-03,Maj. Marcus Thorne,EVA Specialist,59.5,68.6,98.5,36.67,0.58,30.74,7.4,3.9,100,0
+28,12,AST-03,Maj. Marcus Thorne,EVA Specialist,66.4,57.4,98.6,37.08,0.51,30.87,7.1,3.72,100,0
+28,18,AST-03,Maj. Marcus Thorne,EVA Specialist,63.9,55.9,98.2,36.97,0.58,31.02,7.4,3.49,100,0
+29,0,AST-03,Maj. Marcus Thorne,EVA Specialist,64.9,63.1,98.3,36.84,0.59,31.17,6.1,3.67,98,0
+29,6,AST-03,Maj. Marcus Thorne,EVA Specialist,70.9,61.5,98.2,36.89,0.54,31.31,6.3,4.01,99,0
+29,12,AST-03,Maj. Marcus Thorne,EVA Specialist,63.2,65.3,98.3,36.86,0.56,31.45,6.7,3.54,100,0
+29,18,AST-03,Maj. Marcus Thorne,EVA Specialist,71.0,62.5,98.8,37.05,0.46,31.56,7.4,3.94,100,0
+30,0,AST-03,Maj. Marcus Thorne,EVA Specialist,65.3,67.7,98.4,36.71,0.56,31.7,7.2,4.31,100,0
+30,6,AST-03,Maj. Marcus Thorne,EVA Specialist,64.4,60.9,98.3,37.01,0.53,31.83,6.6,3.39,100,0
+30,12,AST-03,Maj. Marcus Thorne,EVA Specialist,66.1,67.6,98.1,37.12,0.54,31.96,7.6,3.49,100,0
+30,18,AST-03,Maj. Marcus Thorne,EVA Specialist,59.3,53.8,98.4,36.93,0.46,32.08,6.8,4.06,99,0
+1,0,AST-04,Dr. Priya Nair,Payload & Medical Officer,62.6,69.8,98.8,36.51,0.46,12.12,7.6,3.8,100,0
+1,6,AST-04,Dr. Priya Nair,Payload & Medical Officer,64.9,68.1,99.5,36.65,0.49,12.24,6.9,3.72,100,0
+1,12,AST-04,Dr. Priya Nair,Payload & Medical Officer,66.8,71.7,99.0,36.95,0.47,12.36,6.5,3.46,100,0
+1,18,AST-04,Dr. Priya Nair,Payload & Medical Officer,64.3,61.7,97.9,36.88,0.5,12.48,7.4,3.96,100,0
+2,0,AST-04,Dr. Priya Nair,Payload & Medical Officer,65.9,68.7,98.7,36.85,0.5,12.6,7.5,3.8,100,0
+2,6,AST-04,Dr. Priya Nair,Payload & Medical Officer,67.7,59.3,98.2,36.8,0.58,12.74,7.7,3.94,100,0
+2,12,AST-04,Dr. Priya Nair,Payload & Medical Officer,65.5,73.0,99.6,36.63,0.47,12.86,6.5,3.96,100,0
+2,18,AST-04,Dr. Priya Nair,Payload & Medical Officer,60.4,73.7,98.8,37.06,0.47,12.98,6.7,3.42,100,0
+3,0,AST-04,Dr. Priya Nair,Payload & Medical Officer,63.2,68.5,99.8,36.86,0.49,13.1,7.0,3.62,100,0
+3,6,AST-04,Dr. Priya Nair,Payload & Medical Officer,61.4,66.5,98.8,36.87,0.53,13.23,6.1,3.24,98,0
+3,12,AST-04,Dr. Priya Nair,Payload & Medical Officer,70.5,71.9,98.5,36.88,0.53,13.36,7.7,3.73,100,0
+3,18,AST-04,Dr. Priya Nair,Payload & Medical Officer,65.9,81.1,98.9,36.66,0.47,13.48,6.6,3.68,100,0
+4,0,AST-04,Dr. Priya Nair,Payload & Medical Officer,60.5,73.3,99.1,36.76,0.48,13.6,5.5,3.88,94,0
+4,6,AST-04,Dr. Priya Nair,Payload & Medical Officer,63.8,66.2,99.6,36.94,0.55,13.74,7.3,4.33,100,0
+4,12,AST-04,Dr. Priya Nair,Payload & Medical Officer,65.3,71.9,98.8,36.98,0.5,13.86,7.0,4.23,100,0
+4,18,AST-04,Dr. Priya Nair,Payload & Medical Officer,65.2,68.5,98.8,36.95,0.46,13.98,7.8,3.66,100,0
+5,0,AST-04,Dr. Priya Nair,Payload & Medical Officer,63.9,70.3,99.1,36.46,0.6,14.13,7.2,3.63,100,0
+5,6,AST-04,Dr. Priya Nair,Payload & Medical Officer,63.3,66.7,98.7,37.0,0.6,14.28,6.0,3.99,97,0
+5,12,AST-04,Dr. Priya Nair,Payload & Medical Officer,61.8,64.1,98.6,36.77,0.51,14.41,8.2,3.72,100,0
+5,18,AST-04,Dr. Priya Nair,Payload & Medical Officer,68.5,74.8,98.7,37.12,0.45,14.52,7.5,4.0,100,0
+6,0,AST-04,Dr. Priya Nair,Payload & Medical Officer,61.4,70.4,99.0,37.02,0.57,14.66,7.6,3.99,100,0
+6,6,AST-04,Dr. Priya Nair,Payload & Medical Officer,60.0,70.3,99.2,37.03,0.56,14.8,6.8,3.66,100,0
+6,12,AST-04,Dr. Priya Nair,Payload & Medical Officer,65.0,72.3,98.9,36.85,0.54,14.94,7.6,3.89,100,0
+6,18,AST-04,Dr. Priya Nair,Payload & Medical Officer,70.5,75.5,98.8,36.62,0.56,15.08,6.6,3.6,100,0
+7,0,AST-04,Dr. Priya Nair,Payload & Medical Officer,60.2,66.1,98.7,36.59,0.59,15.23,6.3,3.81,99,0
+7,6,AST-04,Dr. Priya Nair,Payload & Medical Officer,64.8,67.6,99.3,36.74,0.55,15.37,6.7,4.06,100,0
+7,12,AST-04,Dr. Priya Nair,Payload & Medical Officer,60.2,74.5,98.9,36.88,0.5,15.5,6.6,3.62,100,0
+7,18,AST-04,Dr. Priya Nair,Payload & Medical Officer,60.5,73.5,98.2,36.89,0.55,15.64,7.4,3.99,100,0
+8,0,AST-04,Dr. Priya Nair,Payload & Medical Officer,61.6,72.9,98.9,36.72,0.51,15.77,6.8,3.78,100,0
+8,6,AST-04,Dr. Priya Nair,Payload & Medical Officer,62.8,72.5,98.6,36.81,0.55,15.91,7.5,3.71,100,0
+8,12,AST-04,Dr. Priya Nair,Payload & Medical Officer,62.8,73.7,98.9,36.85,0.49,16.03,6.7,3.84,100,0
+8,18,AST-04,Dr. Priya Nair,Payload & Medical Officer,68.1,65.9,98.9,36.85,0.6,16.18,6.5,3.73,100,0
+9,0,AST-04,Dr. Priya Nair,Payload & Medical Officer,63.9,69.3,98.9,37.01,0.5,16.3,6.4,4.01,99,0
+9,6,AST-04,Dr. Priya Nair,Payload & Medical Officer,68.7,73.1,99.2,37.1,0.54,16.44,7.2,4.11,100,0
+9,12,AST-04,Dr. Priya Nair,Payload & Medical Officer,64.5,70.1,98.7,37.03,0.56,16.58,6.3,3.63,99,0
+9,18,AST-04,Dr. Priya Nair,Payload & Medical Officer,66.5,70.8,98.7,36.88,0.53,16.71,7.5,4.07,100,0
+10,0,AST-04,Dr. Priya Nair,Payload & Medical Officer,61.9,70.6,99.6,36.72,0.55,16.85,7.4,3.75,100,0
+10,6,AST-04,Dr. Priya Nair,Payload & Medical Officer,64.0,63.6,99.2,36.96,0.55,16.99,6.7,3.65,100,0
+10,12,AST-04,Dr. Priya Nair,Payload & Medical Officer,68.3,78.4,99.0,36.67,0.52,17.12,7.7,3.94,100,0
+10,18,AST-04,Dr. Priya Nair,Payload & Medical Officer,65.8,76.7,99.1,36.87,0.57,17.26,7.1,3.97,100,0
+11,0,AST-04,Dr. Priya Nair,Payload & Medical Officer,55.1,68.5,98.9,36.63,0.49,17.38,7.2,4.03,100,0
+11,6,AST-04,Dr. Priya Nair,Payload & Medical Officer,57.9,75.6,98.5,36.78,0.54,17.52,6.4,3.99,99,0
+11,12,AST-04,Dr. Priya Nair,Payload & Medical Officer,66.2,66.0,99.2,36.71,0.6,17.67,7.3,3.82,100,0
+11,18,AST-04,Dr. Priya Nair,Payload & Medical Officer,68.2,69.4,98.7,36.73,0.46,17.78,7.0,3.58,100,0
+12,0,AST-04,Dr. Priya Nair,Payload & Medical Officer,63.4,62.3,98.6,36.76,0.48,17.9,6.1,3.66,98,0
+12,6,AST-04,Dr. Priya Nair,Payload & Medical Officer,61.9,75.3,98.4,36.69,0.47,18.02,6.6,3.41,100,0
+12,12,AST-04,Dr. Priya Nair,Payload & Medical Officer,62.4,70.9,99.0,36.72,0.47,18.14,7.6,3.69,100,0
+12,18,AST-04,Dr. Priya Nair,Payload & Medical Officer,57.3,69.2,99.3,36.84,0.47,18.26,7.2,4.61,100,0
+13,0,AST-04,Dr. Priya Nair,Payload & Medical Officer,65.2,65.0,98.8,36.53,0.46,18.38,6.0,3.68,97,0
+13,6,AST-04,Dr. Priya Nair,Payload & Medical Officer,59.8,58.4,99.0,37.05,0.55,18.52,7.4,3.91,100,0
+13,12,AST-04,Dr. Priya Nair,Payload & Medical Officer,65.4,60.4,98.7,36.93,0.48,18.64,8.1,3.78,100,0
+13,18,AST-04,Dr. Priya Nair,Payload & Medical Officer,52.4,62.7,98.6,36.96,0.58,18.78,6.1,3.52,98,0
+14,0,AST-04,Dr. Priya Nair,Payload & Medical Officer,69.5,68.6,98.7,36.76,0.59,18.93,7.3,3.42,100,0
+14,6,AST-04,Dr. Priya Nair,Payload & Medical Officer,62.8,83.4,98.3,36.9,0.53,19.06,8.0,3.45,100,0
+14,12,AST-04,Dr. Priya Nair,Payload & Medical Officer,64.8,64.5,98.6,36.67,0.48,19.18,7.4,3.67,100,0
+14,18,AST-04,Dr. Priya Nair,Payload & Medical Officer,65.3,69.0,98.8,36.87,0.47,19.3,7.8,3.65,100,0
+15,0,AST-04,Dr. Priya Nair,Payload & Medical Officer,61.5,68.8,99.3,36.83,0.57,19.44,7.4,3.51,100,0
+15,6,AST-04,Dr. Priya Nair,Payload & Medical Officer,61.6,66.6,98.7,36.88,0.49,19.56,7.4,4.17,100,0
+15,12,AST-04,Dr. Priya Nair,Payload & Medical Officer,61.8,72.3,98.0,36.71,0.46,19.67,7.6,3.79,100,0
+15,18,AST-04,Dr. Priya Nair,Payload & Medical Officer,61.7,66.3,98.8,36.93,0.52,19.8,6.7,3.94,100,0
+16,0,AST-04,Dr. Priya Nair,Payload & Medical Officer,54.4,67.5,98.6,37.01,0.57,19.94,6.7,3.47,100,0
+16,6,AST-04,Dr. Priya Nair,Payload & Medical Officer,72.4,71.1,98.8,36.93,0.53,20.07,5.8,4.32,96,0
+16,12,AST-04,Dr. Priya Nair,Payload & Medical Officer,63.0,71.4,98.8,36.74,0.49,20.19,7.2,3.53,100,0
+16,18,AST-04,Dr. Priya Nair,Payload & Medical Officer,61.1,67.3,99.3,36.73,0.51,20.32,6.8,3.91,100,0
+17,0,AST-04,Dr. Priya Nair,Payload & Medical Officer,61.4,73.8,99.1,37.08,0.59,20.47,6.7,3.75,100,0
+17,6,AST-04,Dr. Priya Nair,Payload & Medical Officer,69.4,70.7,98.5,36.62,0.45,20.58,7.2,3.88,100,0
+17,12,AST-04,Dr. Priya Nair,Payload & Medical Officer,63.6,71.1,99.4,36.95,0.5,20.7,7.3,3.96,100,0
+17,18,AST-04,Dr. Priya Nair,Payload & Medical Officer,60.6,65.1,99.2,36.96,0.54,20.84,6.7,3.73,100,0
+18,0,AST-04,Dr. Priya Nair,Payload & Medical Officer,58.3,68.0,99.2,36.73,0.59,20.99,6.8,3.45,100,0
+18,6,AST-04,Dr. Priya Nair,Payload & Medical Officer,60.2,71.5,98.8,36.87,0.53,21.12,7.0,3.31,100,0
+18,12,AST-04,Dr. Priya Nair,Payload & Medical Officer,68.2,73.9,99.0,37.03,0.59,21.27,7.4,4.01,100,0
+18,18,AST-04,Dr. Priya Nair,Payload & Medical Officer,66.2,64.4,98.1,36.57,0.58,21.42,7.8,3.47,100,0
+19,0,AST-04,Dr. Priya Nair,Payload & Medical Officer,61.1,67.0,98.6,36.64,0.51,21.55,7.2,4.31,100,0
+19,6,AST-04,Dr. Priya Nair,Payload & Medical Officer,63.8,60.7,99.1,36.56,0.52,21.68,7.6,3.83,100,0
+19,12,AST-04,Dr. Priya Nair,Payload & Medical Officer,82.4,50.8,97.9,37.13,4.37,22.77,7.4,4.04,76,1
+19,18,AST-04,Dr. Priya Nair,Payload & Medical Officer,77.2,59.3,97.9,37.18,4.27,23.84,5.6,4.52,75,1
+20,0,AST-04,Dr. Priya Nair,Payload & Medical Officer,69.3,73.0,98.8,36.77,0.53,23.97,6.1,3.97,98,0
+20,6,AST-04,Dr. Priya Nair,Payload & Medical Officer,63.8,72.3,98.6,36.78,0.46,24.08,6.9,4.37,100,0
+20,12,AST-04,Dr. Priya Nair,Payload & Medical Officer,79.9,48.3,97.9,36.87,4.3,25.15,6.6,3.93,75,1
+20,18,AST-04,Dr. Priya Nair,Payload & Medical Officer,70.4,53.4,98.2,37.02,4.3,26.22,5.4,2.95,73,1
+21,0,AST-04,Dr. Priya Nair,Payload & Medical Officer,62.4,72.8,99.3,36.73,0.57,26.36,6.6,3.13,100,0
+21,6,AST-04,Dr. Priya Nair,Payload & Medical Officer,65.4,69.1,98.9,37.09,0.45,26.47,5.6,3.6,95,0
+21,12,AST-04,Dr. Priya Nair,Payload & Medical Officer,65.6,65.1,98.8,36.87,0.56,26.61,7.0,3.59,100,0
+21,18,AST-04,Dr. Priya Nair,Payload & Medical Officer,64.9,65.5,98.9,36.87,0.46,26.72,7.5,3.19,100,0
+22,0,AST-04,Dr. Priya Nair,Payload & Medical Officer,68.1,68.3,99.0,36.98,0.51,26.85,6.8,3.71,100,0
+22,6,AST-04,Dr. Priya Nair,Payload & Medical Officer,60.3,61.1,99.3,36.99,0.46,26.96,6.4,3.68,99,0
+22,12,AST-04,Dr. Priya Nair,Payload & Medical Officer,65.1,68.3,98.8,36.72,0.48,27.08,7.2,4.11,100,0
+22,18,AST-04,Dr. Priya Nair,Payload & Medical Officer,64.0,62.1,98.9,36.76,0.59,27.23,7.2,4.01,100,0
+23,0,AST-04,Dr. Priya Nair,Payload & Medical Officer,59.6,78.5,98.9,37.04,0.55,27.37,8.1,3.65,100,0
+23,6,AST-04,Dr. Priya Nair,Payload & Medical Officer,63.0,71.4,98.9,36.99,0.58,27.52,5.9,3.46,97,0
+23,12,AST-04,Dr. Priya Nair,Payload & Medical Officer,63.3,71.5,98.8,36.98,0.53,27.65,7.5,3.27,100,0
+23,18,AST-04,Dr. Priya Nair,Payload & Medical Officer,63.2,69.6,99.4,36.7,0.5,27.78,7.7,3.98,100,0
+24,0,AST-04,Dr. Priya Nair,Payload & Medical Officer,63.5,72.9,98.5,36.93,0.6,27.93,7.1,3.7,100,0
+24,6,AST-04,Dr. Priya Nair,Payload & Medical Officer,68.5,75.4,99.0,36.63,0.48,28.05,7.4,3.24,100,0
+24,12,AST-04,Dr. Priya Nair,Payload & Medical Officer,59.9,68.6,98.7,36.62,0.56,28.19,6.6,3.73,100,0
+24,18,AST-04,Dr. Priya Nair,Payload & Medical Officer,60.0,71.7,98.7,36.72,0.58,28.34,7.0,4.02,100,0
+25,0,AST-04,Dr. Priya Nair,Payload & Medical Officer,57.3,76.6,98.8,36.74,0.45,28.45,6.7,4.1,100,0
+25,6,AST-04,Dr. Priya Nair,Payload & Medical Officer,64.3,67.5,98.9,36.79,0.53,28.58,7.7,3.49,100,0
+25,12,AST-04,Dr. Priya Nair,Payload & Medical Officer,65.7,68.7,99.1,36.48,0.46,28.69,7.8,3.72,100,0
+25,18,AST-04,Dr. Priya Nair,Payload & Medical Officer,61.9,73.3,99.1,36.72,0.59,28.84,7.0,3.53,100,0
+26,0,AST-04,Dr. Priya Nair,Payload & Medical Officer,66.9,68.2,97.6,36.74,0.5,28.96,7.5,3.09,100,0
+26,6,AST-04,Dr. Priya Nair,Payload & Medical Officer,64.9,64.1,99.0,36.91,0.47,29.08,6.8,3.59,100,0
+26,12,AST-04,Dr. Priya Nair,Payload & Medical Officer,60.0,61.2,98.6,36.82,0.46,29.19,8.0,3.54,100,0
+26,18,AST-04,Dr. Priya Nair,Payload & Medical Officer,65.8,64.3,99.0,36.75,0.58,29.34,6.5,3.57,100,0
+27,0,AST-04,Dr. Priya Nair,Payload & Medical Officer,58.9,67.5,99.2,36.88,0.55,29.48,6.9,4.15,100,0
+27,6,AST-04,Dr. Priya Nair,Payload & Medical Officer,65.7,66.5,99.4,36.63,0.49,29.6,7.6,4.35,100,0
+27,12,AST-04,Dr. Priya Nair,Payload & Medical Officer,62.6,73.6,99.7,36.71,0.51,29.73,6.0,3.56,97,0
+27,18,AST-04,Dr. Priya Nair,Payload & Medical Officer,68.0,71.0,99.2,36.88,0.53,29.86,6.5,3.6,100,0
+28,0,AST-04,Dr. Priya Nair,Payload & Medical Officer,61.3,74.2,99.2,36.87,0.5,29.98,7.6,4.31,100,0
+28,6,AST-04,Dr. Priya Nair,Payload & Medical Officer,69.7,74.6,98.1,37.07,0.49,30.1,6.7,4.02,100,0
+28,12,AST-04,Dr. Priya Nair,Payload & Medical Officer,60.3,73.8,99.3,36.9,0.48,30.22,7.7,3.9,100,0
+28,18,AST-04,Dr. Priya Nair,Payload & Medical Officer,63.0,59.4,98.7,36.88,0.52,30.35,6.5,4.37,100,0
+29,0,AST-04,Dr. Priya Nair,Payload & Medical Officer,59.5,70.9,99.2,36.61,0.59,30.5,8.1,4.39,100,0
+29,6,AST-04,Dr. Priya Nair,Payload & Medical Officer,61.3,70.0,98.9,36.68,0.5,30.62,7.0,4.03,100,0
+29,12,AST-04,Dr. Priya Nair,Payload & Medical Officer,65.5,66.3,98.9,36.52,0.55,30.76,7.2,3.85,100,0
+29,18,AST-04,Dr. Priya Nair,Payload & Medical Officer,68.1,75.8,98.8,36.84,0.45,30.87,6.6,3.59,100,0
+30,0,AST-04,Dr. Priya Nair,Payload & Medical Officer,68.2,77.2,98.7,36.81,0.56,31.01,7.8,3.43,100,0
+30,6,AST-04,Dr. Priya Nair,Payload & Medical Officer,57.1,73.5,98.5,36.84,0.51,31.14,7.6,4.02,100,0
+30,12,AST-04,Dr. Priya Nair,Payload & Medical Officer,60.8,76.8,99.3,36.82,0.59,31.29,7.5,4.63,100,0
+30,18,AST-04,Dr. Priya Nair,Payload & Medical Officer,64.3,65.8,99.4,36.56,0.51,31.42,6.9,3.74,100,0
