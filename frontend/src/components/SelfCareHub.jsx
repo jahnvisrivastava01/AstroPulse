@@ -66,6 +66,7 @@ export default function SelfCareHub({ history, baseline, apiBase, onCheckIn }) {
   const [delay, setDelay] = useState(12), [mood, setMood] = useState(null);
   const [msgs, setMsgs] = useState(() => { try { return JSON.parse(localStorage.getItem('ap_msgs')) || []; } catch { return []; } });
   const [chat, setChat] = useState([]), [q, setQ] = useState(''), [busy, setBusy] = useState(false);
+  const [voiceNote, setVoiceNote] = useState(''), [listening, setListening] = useState(false);
   useEffect(() => {
     const t = setInterval(() => setNow(Date.now()), 1000), on = () => setOnline(true), off = () => setOnline(false);
     addEventListener('online', on); addEventListener('offline', off);
@@ -78,6 +79,27 @@ export default function SelfCareHub({ history, baseline, apiBase, onCheckIn }) {
       .then(() => setMsgs((x) => x.map((y) => (y.id === m.id ? { ...y, sync: true } : y)))).catch(() => {}));
   }, [online, msgs.length]);
 
+  const toggleVoiceLog = () => {
+    const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechRec) {
+      setVoiceNote('Speech recognition unavailable in this browser — type note manually.');
+      return;
+    }
+    if (listening) { setListening(false); return; }
+    const rec = new SpeechRec();
+    rec.lang = 'en-US';
+    rec.interimResults = false;
+    setListening(true);
+    rec.onresult = (ev) => {
+      const transcript = ev.results[0][0].transcript;
+      setVoiceNote((prev) => (prev ? `${prev} ${transcript}` : transcript));
+      setListening(false);
+    };
+    rec.onerror = () => setListening(false);
+    rec.onend = () => setListening(false);
+    rec.start();
+  };
+
   const submit = (e) => {
     e.preventDefault(); const p = {};
     new FormData(e.target).forEach((v, k) => { if (v !== '' && k !== 'mood') p[k] = +v; else if (k === 'mood' && v !== '') setMood(+v); });
@@ -89,7 +111,7 @@ export default function SelfCareHub({ history, baseline, apiBase, onCheckIn }) {
     if (online) try { const r = await post(`${apiBase}/api/assistant`, { question: t, summary: summarize(A, mood), crit: A.crit }); a = (await r.json()).answer; if (a) src = 'Gemini + guardrails'; } catch {}
     setChat((c) => [...c, { r: 'a', t: a || localAnswer(A), src }]); setBusy(false);
   };
-  const report = () => setMsgs((m) => [{ id: String(Date.now()), text: `Crew health report: ${summarize(A, mood)}`, delay, sent: Date.now(), sync: false }, ...m]);
+  const report = () => setMsgs((m) => [{ id: String(Date.now()), text: `Crew health report: ${summarize(A, mood)}${voiceNote ? ` | Voice Log: ${voiceNote}` : ''}`, delay, sent: Date.now(), sync: false }, ...m]);
   const eta = (m) => { const s = Math.max(0, Math.ceil((m.sent + m.delay * 6e4 - now) / 1000)); return s ? `In transit, ETA ${Math.floor(s / 60)}m ${s % 60}s` : 'Delivered to ground'; };
   const HZS = hazards(A, mood, delay);
   const flags = Object.keys(M).filter((k) => A.out[k].breach || A.out[k].drift || A.out[k].eta !== null);
@@ -135,6 +157,28 @@ export default function SelfCareHub({ history, baseline, apiBase, onCheckIn }) {
             {[['heart_rate_bpm', 'Heart rate (bpm)'], ['hrv_ms', 'HRV (ms)'], ['spo2_pct', 'SpO2 (%)'], ['core_temp_c', 'Temp (C)'], ['sleep_hours', 'Sleep (h)'], ['mood', 'Mood (1-5)']].map(([k, l]) => (
               <label key={k} className="text-xs text-slate-400 flex flex-col gap-1">{l}<input name={k} type="number" step="any" className={inp} /></label>
             ))}
+            <div className="col-span-2 sm:col-span-3 space-y-1.5">
+              <div className="flex items-center justify-between">
+                <span className="text-xs text-slate-400">Hands-Free Crew Audio Log (Optional)</span>
+                <button
+                  type="button"
+                  onClick={toggleVoiceLog}
+                  className={`text-[11px] px-2.5 py-0.5 rounded-full border font-medium ${
+                    listening
+                      ? 'bg-rose-500/20 text-rose-300 border-rose-500/50 animate-pulse'
+                      : 'border-slate-700 text-cyan-400 hover:border-cyan-500/50'
+                  }`}
+                >
+                  {listening ? '● Listening...' : '🎙 Voice Check-In'}
+                </button>
+              </div>
+              <input
+                value={voiceNote}
+                onChange={(e) => setVoiceNote(e.target.value)}
+                placeholder="Speak or type subjective symptoms / EVA notes..."
+                className={inp}
+              />
+            </div>
             <button className="col-span-2 sm:col-span-3 bg-cyan-500 text-slate-950 font-semibold rounded-lg py-2 text-sm">Save check-in</button>
           </form>
         </div>

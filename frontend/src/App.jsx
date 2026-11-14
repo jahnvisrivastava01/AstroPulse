@@ -13,7 +13,12 @@ import {
   AlertTriangle,
   UserCheck,
   Cpu,
-  Sparkles
+  Sparkles,
+  Lock,
+  Unlock,
+  Printer,
+  ShieldCheck,
+  XCircle
 } from 'lucide-react';
 import {
   ResponsiveContainer,
@@ -106,7 +111,11 @@ function evaluateVitalsLocal(v) {
 export default function App() {
   const crewIds = Object.keys(snapshotData);
   const [selectedId, setSelectedId] = useState(crewIds[0]);
-  const [viewMode, setViewMode] = useState('surgeon'); // 'surgeon' | 'crew'
+  const [viewMode, setViewMode] = useState('crew'); // defaults to Crew Tablet; Flight Surgeon requires PIN
+  const [isSurgeonUnlocked, setIsSurgeonUnlocked] = useState(false);
+  const [showPinModal, setShowPinModal] = useState(false);
+  const [pinInput, setPinInput] = useState('');
+  const [pinError, setPinError] = useState(false);
   const [isLive, setIsLive] = useState(true);
   const [activeEvent, setActiveEvent] = useState(null); // null | 'solar_flare' | 'eva_strain' | 'sleep_debt'
   const [backendConnected, setBackendConnected] = useState(false);
@@ -214,6 +223,45 @@ export default function App() {
     });
   };
 
+  const handleModeSwitch = (targetMode) => {
+    if (targetMode === 'crew') {
+      setViewMode('crew');
+    } else if (isSurgeonUnlocked) {
+      setViewMode('surgeon');
+    } else {
+      setPinInput('');
+      setPinError(false);
+      setShowPinModal(true);
+    }
+  };
+
+  const verifySurgeonPin = (e) => {
+    e.preventDefault();
+    if (pinInput.trim() === '1969') {
+      setIsSurgeonUnlocked(true);
+      setViewMode('surgeon');
+      setShowPinModal(false);
+      setPinError(false);
+    } else {
+      setPinError(true);
+    }
+  };
+
+  const lockSurgeonConsole = () => {
+    setIsSurgeonUnlocked(false);
+    setViewMode('crew');
+  };
+
+  const evaChecks = useMemo(() => {
+    const checks = [
+      { label: 'Readiness >= 75%', pass: aiAnalysis.readiness_score >= 75, val: `${aiAnalysis.readiness_score}%` },
+      { label: 'HRV >= 42 ms', pass: currentVitals.hrv_ms >= 42, val: `${currentVitals.hrv_ms} ms` },
+      { label: 'Radiation < 1.2 mSv/h', pass: currentVitals.radiation_msv_hr < 1.2, val: `${currentVitals.radiation_msv_hr}` },
+      { label: 'Sleep >= 6.0 hrs', pass: currentVitals.sleep_hours >= 6.0, val: `${currentVitals.sleep_hours}h` },
+    ];
+    return { checks, cleared: checks.every((c) => c.pass) };
+  }, [aiAnalysis.readiness_score, currentVitals]);
+
   const statusColor =
     aiAnalysis.status === 'CRITICAL'
       ? 'text-rose-400 border-rose-500/40 bg-rose-500/10'
@@ -294,24 +342,45 @@ export default function App() {
           >
             {theme === 'dark' ? 'Light mode' : 'Dark mode'}
           </button>
-          {/* Role Toggle */}
-          <div className="flex items-center bg-slate-900 p-1 rounded-xl border border-slate-800">
+          {/* Handover PDF Export + PIN-Protected Role Toggle */}
+          <div className="flex items-center gap-2">
             <button
-              onClick={() => setViewMode('surgeon')}
-              className={`px-3 py-1 rounded-lg text-xs font-medium transition ${
-                viewMode === 'surgeon' ? 'bg-cyan-500 text-slate-950 font-semibold' : 'text-slate-400 hover:text-white'
-              }`}
+              onClick={() => window.print()}
+              title="Export Flight Surgeon Handover / MedEvac PDF"
+              className="px-2.5 py-1.5 rounded-lg text-xs font-medium border border-slate-700 bg-slate-900 text-slate-300 hover:text-white flex items-center gap-1.5"
             >
-              Flight Surgeon
+              <Printer className="w-3.5 h-3.5 text-cyan-400" />
+              <span className="hidden md:inline">Handover PDF</span>
             </button>
-            <button
-              onClick={() => setViewMode('crew')}
-              className={`px-3 py-1 rounded-lg text-xs font-medium transition ${
-                viewMode === 'crew' ? 'bg-cyan-500 text-slate-950 font-semibold' : 'text-slate-400 hover:text-white'
-              }`}
-            >
-              Crew Tablet
-            </button>
+
+            <div className="flex items-center bg-slate-900 p-1 rounded-xl border border-slate-800">
+              <button
+                onClick={() => handleModeSwitch('crew')}
+                className={`px-3 py-1 rounded-lg text-xs font-medium transition ${
+                  viewMode === 'crew' ? 'bg-cyan-500 text-slate-950 font-semibold' : 'text-slate-400 hover:text-white'
+                }`}
+              >
+                Crew Tablet
+              </button>
+              <button
+                onClick={() => handleModeSwitch('surgeon')}
+                className={`px-3 py-1 rounded-lg text-xs font-medium transition flex items-center gap-1 ${
+                  viewMode === 'surgeon' ? 'bg-cyan-500 text-slate-950 font-semibold' : 'text-slate-400 hover:text-white'
+                }`}
+              >
+                {isSurgeonUnlocked ? <Unlock className="w-3 h-3" /> : <Lock className="w-3 h-3" />}
+                Flight Surgeon
+              </button>
+              {isSurgeonUnlocked && (
+                <button
+                  onClick={lockSurgeonConsole}
+                  title="Lock Flight Surgeon Console"
+                  className="ml-1 px-2 py-1 rounded-lg text-[10px] font-mono text-rose-300 hover:bg-rose-500/20"
+                >
+                  Lock
+                </button>
+              )}
+            </div>
           </div>
         </div>
       </header>
@@ -399,6 +468,49 @@ export default function App() {
                 >
                   {isLive ? '● STREAMING LIVE' : '❚❚ PAUSED'}
                 </button>
+              </div>
+            </div>
+
+            {/* Print-Only Mission Handover Banner */}
+            <div className="hidden print-only-header border-b pb-3 mb-4">
+              <h1 className="text-xl font-bold">ASTROPULSE // FLIGHT SURGEON HANDOVER & MEDEVAC REPORT</h1>
+              <p className="text-xs">Crew: {selectedCrew.name} ({selectedCrew.id}) | Mission Day {currentVitals.mission_day} | Generated: {new Date().toLocaleString()}</p>
+            </div>
+
+            {/* Automated EVA Go / No-Go Airlock Gate */}
+            <div className={`p-3.5 rounded-2xl border flex flex-wrap items-center justify-between gap-3 ${
+              evaChecks.cleared
+                ? 'bg-emerald-950/20 border-emerald-500/30'
+                : 'bg-rose-950/25 border-rose-500/40'
+            }`}>
+              <div className="flex items-center gap-2.5">
+                {evaChecks.cleared ? (
+                  <ShieldCheck className="w-5 h-5 text-emerald-400 shrink-0" />
+                ) : (
+                  <XCircle className="w-5 h-5 text-rose-400 shrink-0" />
+                )}
+                <div>
+                  <div className="text-[11px] uppercase tracking-wider text-slate-400 font-semibold">
+                    Pre-Spacewalk Airlock Gate
+                  </div>
+                  <div className={`text-sm font-bold ${evaChecks.cleared ? 'text-emerald-300' : 'text-rose-300'}`}>
+                    {evaChecks.cleared ? 'GO — CLEARED FOR EVA' : 'NO-GO — EVA AIRLOCK HOLD'}
+                  </div>
+                </div>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {evaChecks.checks.map((c) => (
+                  <span
+                    key={c.label}
+                    className={`text-[11px] font-mono px-2 py-1 rounded-lg border ${
+                      c.pass
+                        ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-300'
+                        : 'bg-rose-500/15 border-rose-500/40 text-rose-300'
+                    }`}
+                  >
+                    {c.pass ? '✓' : '✕'} {c.label} ({c.val})
+                  </span>
+                ))}
               </div>
             </div>
 
@@ -550,6 +662,57 @@ export default function App() {
           }}
         />
       </main>
+      {/* Flight Surgeon Clearance PIN Modal */}
+      {showPinModal && (
+        <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4 no-print">
+          <form
+            onSubmit={verifySurgeonPin}
+            className="w-full max-w-sm rounded-2xl border border-slate-700 bg-slate-900 p-6 space-y-4 shadow-2xl"
+          >
+            <div className="flex items-center gap-2.5 text-cyan-400">
+              <Lock className="w-5 h-5" />
+              <h3 className="font-bold text-base text-white">Flight Surgeon Clearance Required</h3>
+            </div>
+            <p className="text-xs text-slate-400 leading-relaxed">
+              Multi-crew telemetry, ML anomaly thresholds, and override controls require Flight Surgeon authorization.
+            </p>
+            <div>
+              <input
+                type="password"
+                maxLength={6}
+                autoFocus
+                value={pinInput}
+                onChange={(e) => { setPinInput(e.target.value); setPinError(false); }}
+                placeholder="Enter 4-digit PIN (Demo: 1969)"
+                className="w-full bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-center font-mono text-lg tracking-widest text-white focus:outline-none focus:border-cyan-400"
+              />
+              {pinError && (
+                <p className="text-xs text-rose-400 mt-1.5 text-center">
+                  Invalid clearance code. Use demo PIN: 1969
+                </p>
+              )}
+              <p className="text-[11px] text-slate-500 mt-2 text-center">
+                NASA Mission Control Demo PIN: <span className="font-mono text-slate-300">1969</span>
+              </p>
+            </div>
+            <div className="flex gap-2 pt-1">
+              <button
+                type="button"
+                onClick={() => setShowPinModal(false)}
+                className="flex-1 py-2 rounded-xl border border-slate-700 text-xs font-medium text-slate-300 hover:bg-slate-800"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                className="flex-1 py-2 rounded-xl bg-cyan-500 text-slate-950 text-xs font-bold hover:opacity-90"
+              >
+                Unlock Console
+              </button>
+            </div>
+          </form>
+        </div>
+      )}
     </div>
   );
 }
