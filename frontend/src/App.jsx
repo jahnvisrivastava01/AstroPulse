@@ -18,7 +18,8 @@ import {
   Unlock,
   Printer,
   ShieldCheck,
-  XCircle
+  XCircle,
+  Info
 } from 'lucide-react';
 import {
   ResponsiveContainer,
@@ -33,6 +34,7 @@ import snapshotData from './data/telemetrySnapshot.json';
 import BodySystemMap from './components/BodySystemMap';
 import SelfCareHub from './components/SelfCareHub';
 import SurgeonConsole from './components/SurgeonConsole';
+import MissionBrief from './components/MissionBrief';
 
 const API_BASE = 'http://localhost:8000';
 
@@ -112,7 +114,7 @@ function evaluateVitalsLocal(v) {
 export default function App() {
   const crewIds = Object.keys(snapshotData);
   const [selectedId, setSelectedId] = useState(crewIds[0]);
-  const [viewMode, setViewMode] = useState('crew'); // defaults to Crew Tablet; Flight Surgeon requires PIN
+  const [viewMode, setViewMode] = useState('crew'); // 'crew' | 'surgeon' | 'about'
   const [isSurgeonUnlocked, setIsSurgeonUnlocked] = useState(false);
   const [showPinModal, setShowPinModal] = useState(false);
   const [pinInput, setPinInput] = useState('');
@@ -267,8 +269,8 @@ export default function App() {
   };
 
   const handleModeSwitch = (targetMode) => {
-    if (targetMode === 'crew') {
-      setViewMode('crew');
+    if (targetMode === 'crew' || targetMode === 'about') {
+      setViewMode(targetMode);
     } else if (isSurgeonUnlocked) {
       setViewMode('surgeon');
     } else {
@@ -399,7 +401,8 @@ export default function App() {
           >
             {theme === 'dark' ? 'Light mode' : 'Dark mode'}
           </button>
-          {/* Handover PDF Export + PIN-Protected Role Toggle */}
+
+          {/* Handover PDF Export + PIN-Protected Role & Mission Brief Toggle */}
           <div className="flex items-center gap-2">
             <button
               onClick={() => window.print()}
@@ -437,6 +440,15 @@ export default function App() {
                   Lock
                 </button>
               )}
+              <button
+                onClick={() => handleModeSwitch('about')}
+                className={`px-3 py-1 rounded-lg text-xs font-medium transition flex items-center gap-1 ${
+                  viewMode === 'about' ? 'bg-cyan-500 text-slate-950 font-semibold' : 'text-slate-400 hover:text-white'
+                }`}
+              >
+                <Info className="w-3 h-3" />
+                Mission Brief
+              </button>
             </div>
           </div>
         </div>
@@ -444,322 +456,330 @@ export default function App() {
 
       {/* Main Content */}
       <main className="w-full px-6 lg:px-8 py-6 flex-1 space-y-6">
-        {/* Crew Selector Strip */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-          {crewIds.map((id) => {
-            const member = snapshotData[id];
-            const isSelected = id === selectedId;
-            const latestMember = isSelected
-              ? currentVitals
-              : member.history[member.history.length - 1];
-            const memberScore = isSelected
-              ? aiAnalysis.readiness_score
-              : latestMember.readiness_score;
+        {viewMode === 'about' ? (
+          <MissionBrief onLaunchConsole={() => setViewMode('crew')} />
+        ) : (
+          <>
+            {/* Crew Selector Strip */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+              {crewIds.map((id) => {
+                const member = snapshotData[id];
+                const isSelected = id === selectedId;
+                const latestMember = isSelected
+                  ? currentVitals
+                  : member.history[member.history.length - 1];
+                const memberScore = isSelected
+                  ? aiAnalysis.readiness_score
+                  : latestMember.readiness_score;
 
-            return (
-              <button
-                key={id}
-                onClick={() => setSelectedId(id)}
-                className={`text-left p-3.5 rounded-2xl border transition flex items-center justify-between ${
-                  isSelected
-                    ? 'bg-slate-900/95 border-cyan-400/60 shadow-[0_0_20px_rgba(59,130,246,0.12)]'
-                    : 'bg-slate-900/40 border-slate-800/80 hover:border-slate-700'
-                }`}
-              >
-                <div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-[11px] font-mono text-cyan-400">{member.id}</span>
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                  </div>
-                  <div className="font-semibold text-sm text-white mt-0.5">{member.name}</div>
-                  <div className="text-xs text-slate-400">{member.role}</div>
-                </div>
-                <div className="text-right">
-                  <div
-                    className={`text-xl font-bold font-mono ${
-                      memberScore < 55
-                        ? 'text-rose-400'
-                        : memberScore < 75
-                        ? 'text-amber-400'
-                        : 'text-emerald-400'
+                return (
+                  <button
+                    key={id}
+                    onClick={() => setSelectedId(id)}
+                    className={`text-left p-3.5 rounded-2xl border transition flex items-center justify-between ${
+                      isSelected
+                        ? 'bg-slate-900/95 border-cyan-400/60 shadow-[0_0_20px_rgba(59,130,246,0.12)]'
+                        : 'bg-slate-900/40 border-slate-800/80 hover:border-slate-700'
                     }`}
                   >
-                    {memberScore}%
-                  </div>
-                  <div className="text-[10px] uppercase tracking-wider text-slate-500">Readiness</div>
-                </div>
-              </button>
-            );
-          })}
-        </div>
-
-        {/* Primary Telemetry & AI Analysis Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-          {/* Left Column: Digital Twin Body Map (4 cols) */}
-          <div className="lg:col-span-4">
-            <BodySystemMap
-              affectedSystems={aiAnalysis.affected_systems}
-              vitals={currentVitals}
-            />
-          </div>
-
-          {/* Middle & Right Columns: Vitals KPIs, Live Charts, & AI Countermeasures (8 cols) */}
-          <div className="lg:col-span-8 space-y-6">
-            {/* Readiness Banner */}
-            <div className={`p-4 rounded-2xl border flex flex-wrap items-center justify-between gap-4 ${statusColor}`}>
-              <div className="flex items-center gap-3">
-                <Cpu className="w-6 h-6 shrink-0" />
-                <div>
-                  <div className="text-xs uppercase tracking-wider font-semibold opacity-80">
-                    ML Anomaly & Mission Readiness Assessment
-                  </div>
-                  <div className="text-base font-bold">
-                    {selectedCrew.name} — Status: {aiAnalysis.status} ({aiAnalysis.readiness_score}/100)
-                  </div>
-                </div>
-              </div>
-              <div className="flex items-center gap-2">
-                <button
-                  onClick={() => setIsLive(!isLive)}
-                  className="px-3 py-1 rounded-lg text-xs font-mono bg-slate-950/50 border border-current/30"
-                >
-                  {isLive ? '● STREAMING LIVE' : '❚❚ PAUSED'}
-                </button>
-              </div>
-            </div>
-
-            {/* Print-Only Mission Handover Banner */}
-            <div className="hidden print-only-header border-b pb-3 mb-4">
-              <h1 className="text-xl font-bold">ASTROPULSE // FLIGHT SURGEON HANDOVER & MEDEVAC REPORT</h1>
-              <p className="text-xs">Crew: {selectedCrew.name} ({selectedCrew.id}) | Mission Day {currentVitals.mission_day} | Generated: {new Date().toLocaleString()}</p>
-            </div>
-
-            {/* Automated EVA Go / No-Go Airlock Gate */}
-            <div className={`p-3.5 rounded-2xl border flex flex-wrap items-center justify-between gap-3 ${
-              evaChecks.cleared
-                ? 'bg-emerald-950/20 border-emerald-500/30'
-                : 'bg-rose-950/25 border-rose-500/40'
-            }`}>
-              <div className="flex items-center gap-2.5">
-                {evaChecks.cleared ? (
-                  <ShieldCheck className="w-5 h-5 text-emerald-400 shrink-0" />
-                ) : (
-                  <XCircle className="w-5 h-5 text-rose-400 shrink-0" />
-                )}
-                <div>
-                  <div className="text-[11px] uppercase tracking-wider text-slate-400 font-semibold">
-                    Pre-Spacewalk Airlock Gate
-                  </div>
-                  <div className={`text-sm font-bold ${evaChecks.cleared ? 'text-emerald-300' : 'text-rose-300'}`}>
-                    {evaChecks.hasWaiver ? 'GO — FLIGHT SURGEON WAIVER ACTIVE' : evaChecks.cleared ? 'GO — CLEARED FOR EVA' : 'NO-GO — EVA AIRLOCK HOLD'}
-                  </div>
-                </div>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {evaChecks.checks.map((c) => (
-                  <span
-                    key={c.label}
-                    className={`text-[11px] font-mono px-2 py-1 rounded-lg border ${
-                      c.pass
-                        ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-300'
-                        : 'bg-rose-500/15 border-rose-500/40 text-rose-300'
-                    }`}
-                  >
-                    {c.pass ? '✓' : '✕'} {c.label} ({c.val})
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            {/* 6 Biometric KPI Cards */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-              <MetricCard
-                icon={<Heart className="w-4 h-4 text-rose-400" />}
-                label="Heart Rate"
-                value={`${currentVitals.heart_rate_bpm}`}
-                unit="BPM"
-                sub={`HRV: ${currentVitals.hrv_ms} ms`}
-                alert={currentVitals.heart_rate_bpm > 95}
-              />
-              <MetricCard
-                icon={<Wind className="w-4 h-4 text-cyan-400" />}
-                label="Blood Oxygen (SpO2)"
-                value={`${currentVitals.spo2_pct}`}
-                unit="%"
-                sub="Cabin O2: 21.1%"
-                alert={currentVitals.spo2_pct < 95.5}
-              />
-              <MetricCard
-                icon={<Radio className="w-4 h-4 text-amber-400" />}
-                label="Radiation Flux"
-                value={`${currentVitals.radiation_msv_hr}`}
-                unit="mSv/hr"
-                sub={`Cumul: ${currentVitals.cumulative_rad_msv} mSv`}
-                alert={currentVitals.radiation_msv_hr > 1.5}
-              />
-              <MetricCard
-                icon={<Thermometer className="w-4 h-4 text-orange-400" />}
-                label="Core Body Temp"
-                value={`${currentVitals.core_temp_c}`}
-                unit="°C"
-                sub="Suit LCVG: Auto"
-                alert={currentVitals.core_temp_c > 37.6}
-              />
-              <MetricCard
-                icon={<Moon className="w-4 h-4 text-indigo-400" />}
-                label="Sleep Cycle (24h)"
-                value={`${currentVitals.sleep_hours}`}
-                unit="hrs"
-                sub="REM Efficiency: 84%"
-                alert={currentVitals.sleep_hours < 5.8}
-              />
-              <MetricCard
-                icon={<UserCheck className="w-4 h-4 text-emerald-400" />}
-                label="EVA Readiness"
-                value={`${aiAnalysis.readiness_score}`}
-                unit="%"
-                sub={aiAnalysis.readiness_score >= 75 ? 'Cleared for EVA' : 'Hold Recommended'}
-                alert={aiAnalysis.readiness_score < 75}
-              />
-            </div>
-
-            {/* Real-Time Telemetry Trend Chart (Shown in Flight Surgeon Mode) */}
-            {viewMode === 'surgeon' && (
-              <div className="bg-slate-900/70 border border-slate-800 rounded-2xl p-4">
-                <div className="flex items-center justify-between mb-3">
-                  <span className="text-xs font-semibold uppercase tracking-wider text-slate-300">
-                    Live Telemetry Stream — Heart Rate (BPM) & Readiness Index
-                  </span>
-                  <span className="text-xs font-mono text-slate-400">Mission Day {currentVitals.mission_day}</span>
-                </div>
-                <div className="h-52 w-full">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <AreaChart data={history}>
-                      <defs>
-                        <linearGradient id="hrGrad" x1="0" y1="0" x2="0" y2="1">
-                          <stop offset="5%" stopColor="var(--accent)" stopOpacity={0.35} />
-                          <stop offset="95%" stopColor="var(--accent)" stopOpacity={0} />
-                        </linearGradient>
-                        <linearGradient id="readyGrad" x1="0" y1="0" x2="0" y2="1">
-                          <stop offset="5%" stopColor="#10b981" stopOpacity={0.3} />
-                          <stop offset="95%" stopColor="#10b981" stopOpacity={0} />
-                        </linearGradient>
-                      </defs>
-                      <CartesianGrid strokeDasharray="3 3" stroke="var(--grid)" />
-                      <XAxis dataKey="hour" stroke="var(--muted)" fontSize={11} tickFormatter={(h) => `${h}:00`} />
-                      <YAxis stroke="var(--muted)" fontSize={11} domain={[30, 150]} />
-                      <Tooltip
-                        contentStyle={{ backgroundColor: 'var(--panel)', borderColor: 'var(--line2)', borderRadius: '10px', fontSize: '12px' }}
-                      />
-                      <Area type="monotone" dataKey="heart_rate_bpm" name="Heart Rate (BPM)" stroke="var(--accent)" fill="url(#hrGrad)" strokeWidth={2} />
-                      <Area type="monotone" dataKey="readiness_score" name="Readiness Score" stroke="#10b981" fill="url(#readyGrad)" strokeWidth={2} />
-                    </AreaChart>
-                  </ResponsiveContainer>
-                </div>
-              </div>
-            )}
-
-            {/* AI Flight Surgeon Countermeasure Co-Pilot */}
-            <div className="bg-slate-900/70 border border-slate-800 rounded-2xl p-4 space-y-3">
-              <div className="flex items-center gap-2">
-                <Sparkles className="w-4 h-4 text-cyan-400" />
-                <h2 className="text-xs font-semibold uppercase tracking-wider text-cyan-400">
-                  Autonomous Countermeasure & Medical Protocol Engine
-                </h2>
-              </div>
-
-              <div className="space-y-2.5">
-                {aiAnalysis.recommendations.map((rec, idx) => (
-                  <div
-                    key={idx}
-                    className={`p-3 rounded-xl border flex items-start gap-3 ${
-                      rec.severity === 'critical'
-                        ? 'bg-rose-950/30 border-rose-500/40'
-                        : rec.severity === 'warning'
-                        ? 'bg-amber-950/30 border-amber-500/40'
-                        : 'bg-emerald-950/20 border-emerald-500/30'
-                    }`}
-                  >
-                    {rec.severity === 'optimal' ? (
-                      <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
-                    ) : (
-                      <AlertTriangle
-                        className={`w-5 h-5 shrink-0 mt-0.5 ${
-                          rec.severity === 'critical' ? 'text-rose-400' : 'text-amber-400'
-                        }`}
-                      />
-                    )}
                     <div>
                       <div className="flex items-center gap-2">
-                        <span className="text-xs font-bold text-white">{rec.title}</span>
-                        <span className="text-[10px] font-mono uppercase px-1.5 py-0.5 rounded bg-slate-800 text-slate-300">
-                          {rec.system}
-                        </span>
+                        <span className="text-[11px] font-mono text-cyan-400">{member.id}</span>
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                       </div>
-                      <p className="text-xs text-slate-300 mt-1 leading-relaxed">{rec.action}</p>
+                      <div className="font-semibold text-sm text-white mt-0.5">{member.name}</div>
+                      <div className="text-xs text-slate-400">{member.role}</div>
+                    </div>
+                    <div className="text-right">
+                      <div
+                        className={`text-xl font-bold font-mono ${
+                          memberScore < 55
+                            ? 'text-rose-400'
+                            : memberScore < 75
+                            ? 'text-amber-400'
+                            : 'text-emerald-400'
+                        }`}
+                      >
+                        {memberScore}%
+                      </div>
+                      <div className="text-[10px] uppercase tracking-wider text-slate-500">Readiness</div>
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Primary Telemetry & AI Analysis Grid */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+              {/* Left Column: Digital Twin Body Map (4 cols) */}
+              <div className="lg:col-span-4">
+                <BodySystemMap
+                  affectedSystems={aiAnalysis.affected_systems}
+                  vitals={currentVitals}
+                />
+              </div>
+
+              {/* Middle & Right Columns: Vitals KPIs, Live Charts, & AI Countermeasures (8 cols) */}
+              <div className="lg:col-span-8 space-y-6">
+                {/* Readiness Banner */}
+                <div className={`p-4 rounded-2xl border flex flex-wrap items-center justify-between gap-4 ${statusColor}`}>
+                  <div className="flex items-center gap-3">
+                    <Cpu className="w-6 h-6 shrink-0" />
+                    <div>
+                      <div className="text-xs uppercase tracking-wider font-semibold opacity-80">
+                        ML Anomaly & Mission Readiness Assessment
+                      </div>
+                      <div className="text-base font-bold">
+                        {selectedCrew.name} — Status: {aiAnalysis.status} ({aiAnalysis.readiness_score}/100)
+                      </div>
                     </div>
                   </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-        {/* Crew Tablet View: Priority Surgeon Directives + Self-Care & Ground Link */}
-        {viewMode === 'crew' && (
-          <>
-            {crewOrders.length > 0 && (
-              <div className="rounded-2xl border border-amber-500/40 bg-amber-950/25 p-4 space-y-2">
-                <div className="text-xs font-bold uppercase tracking-wider text-amber-300">
-                  Incoming Flight Surgeon Directives ({crewOrders.length})
-                </div>
-                {crewOrders.map((ord) => (
-                  <div key={ord.id} className="flex items-center justify-between gap-3 text-xs bg-slate-950/60 border border-amber-500/20 rounded-xl px-3 py-2">
-                    <span className="text-white font-medium">
-                      <b className="text-amber-300">[{ord.priority}]</b> {ord.text}
-                    </span>
+                  <div className="flex items-center gap-2">
                     <button
-                      onClick={() => setDispatchedOrders((prev) => prev.filter((x) => x.id !== ord.id))}
-                      className="px-2.5 py-1 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-semibold whitespace-nowrap"
+                      onClick={() => setIsLive(!isLive)}
+                      className="px-3 py-1 rounded-lg text-xs font-mono bg-slate-950/50 border border-current/30"
                     >
-                      Acknowledge
+                      {isLive ? '● STREAMING LIVE' : '❚❚ PAUSED'}
                     </button>
                   </div>
-                ))}
+                </div>
+
+                {/* Print-Only Mission Handover Banner */}
+                <div className="hidden print-only-header border-b pb-3 mb-4">
+                  <h1 className="text-xl font-bold">ASTROPULSE // FLIGHT SURGEON HANDOVER & MEDEVAC REPORT</h1>
+                  <p className="text-xs">Crew: {selectedCrew.name} ({selectedCrew.id}) | Mission Day {currentVitals.mission_day} | Generated: {new Date().toLocaleString()}</p>
+                </div>
+
+                {/* Automated EVA Go / No-Go Airlock Gate */}
+                <div className={`p-3.5 rounded-2xl border flex flex-wrap items-center justify-between gap-3 ${
+                  evaChecks.cleared
+                    ? 'bg-emerald-950/20 border-emerald-500/30'
+                    : 'bg-rose-950/25 border-rose-500/40'
+                }`}>
+                  <div className="flex items-center gap-2.5">
+                    {evaChecks.cleared ? (
+                      <ShieldCheck className="w-5 h-5 text-emerald-400 shrink-0" />
+                    ) : (
+                      <XCircle className="w-5 h-5 text-rose-400 shrink-0" />
+                    )}
+                    <div>
+                      <div className="text-[11px] uppercase tracking-wider text-slate-400 font-semibold">
+                        Pre-Spacewalk Airlock Gate
+                      </div>
+                      <div className={`text-sm font-bold ${evaChecks.cleared ? 'text-emerald-300' : 'text-rose-300'}`}>
+                        {evaChecks.hasWaiver ? 'GO — FLIGHT SURGEON WAIVER ACTIVE' : evaChecks.cleared ? 'GO — CLEARED FOR EVA' : 'NO-GO — EVA AIRLOCK HOLD'}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {evaChecks.checks.map((c) => (
+                      <span
+                        key={c.label}
+                        className={`text-[11px] font-mono px-2 py-1 rounded-lg border ${
+                          c.pass
+                            ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-300'
+                            : 'bg-rose-500/15 border-rose-500/40 text-rose-300'
+                        }`}
+                      >
+                        {c.pass ? '✓' : '✕'} {c.label} ({c.val})
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* 6 Biometric KPI Cards */}
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                  <MetricCard
+                    icon={<Heart className="w-4 h-4 text-rose-400" />}
+                    label="Heart Rate"
+                    value={`${currentVitals.heart_rate_bpm}`}
+                    unit="BPM"
+                    sub={`HRV: ${currentVitals.hrv_ms} ms`}
+                    alert={currentVitals.heart_rate_bpm > 95}
+                  />
+                  <MetricCard
+                    icon={<Wind className="w-4 h-4 text-cyan-400" />}
+                    label="Blood Oxygen (SpO2)"
+                    value={`${currentVitals.spo2_pct}`}
+                    unit="%"
+                    sub="Cabin O2: 21.1%"
+                    alert={currentVitals.spo2_pct < 95.5}
+                  />
+                  <MetricCard
+                    icon={<Radio className="w-4 h-4 text-amber-400" />}
+                    label="Radiation Flux"
+                    value={`${currentVitals.radiation_msv_hr}`}
+                    unit="mSv/hr"
+                    sub={`Cumul: ${currentVitals.cumulative_rad_msv} mSv`}
+                    alert={currentVitals.radiation_msv_hr > 1.5}
+                  />
+                  <MetricCard
+                    icon={<Thermometer className="w-4 h-4 text-orange-400" />}
+                    label="Core Body Temp"
+                    value={`${currentVitals.core_temp_c}`}
+                    unit="°C"
+                    sub="Suit LCVG: Auto"
+                    alert={currentVitals.core_temp_c > 37.6}
+                  />
+                  <MetricCard
+                    icon={<Moon className="w-4 h-4 text-indigo-400" />}
+                    label="Sleep Cycle (24h)"
+                    value={`${currentVitals.sleep_hours}`}
+                    unit="hrs"
+                    sub="REM Efficiency: 84%"
+                    alert={currentVitals.sleep_hours < 5.8}
+                  />
+                  <MetricCard
+                    icon={<UserCheck className="w-4 h-4 text-emerald-400" />}
+                    label="EVA Readiness"
+                    value={`${aiAnalysis.readiness_score}`}
+                    unit="%"
+                    sub={aiAnalysis.readiness_score >= 75 ? 'Cleared for EVA' : 'Hold Recommended'}
+                    alert={aiAnalysis.readiness_score < 75}
+                  />
+                </div>
+
+                {/* Real-Time Telemetry Trend Chart (Shown in Flight Surgeon Mode) */}
+                {viewMode === 'surgeon' && (
+                  <div className="bg-slate-900/70 border border-slate-800 rounded-2xl p-4">
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="text-xs font-semibold uppercase tracking-wider text-slate-300">
+                        Live Telemetry Stream — Heart Rate (BPM) & Readiness Index
+                      </span>
+                      <span className="text-xs font-mono text-slate-400">Mission Day {currentVitals.mission_day}</span>
+                    </div>
+                    <div className="h-52 w-full">
+                      <ResponsiveContainer width="100%" height="100%">
+                        <AreaChart data={history}>
+                          <defs>
+                            <linearGradient id="hrGrad" x1="0" y1="0" x2="0" y2="1">
+                              <stop offset="5%" stopColor="var(--accent)" stopOpacity={0.35} />
+                              <stop offset="95%" stopColor="var(--accent)" stopOpacity={0} />
+                            </linearGradient>
+                            <linearGradient id="readyGrad" x1="0" y1="0" x2="0" y2="1">
+                              <stop offset="5%" stopColor="#10b981" stopOpacity={0.3} />
+                              <stop offset="95%" stopColor="#10b981" stopOpacity={0} />
+                            </linearGradient>
+                          </defs>
+                          <CartesianGrid strokeDasharray="3 3" stroke="var(--grid)" />
+                          <XAxis dataKey="hour" stroke="var(--muted)" fontSize={11} tickFormatter={(h) => `${h}:00`} />
+                          <YAxis stroke="var(--muted)" fontSize={11} domain={[30, 150]} />
+                          <Tooltip
+                            contentStyle={{ backgroundColor: 'var(--panel)', borderColor: 'var(--line2)', borderRadius: '10px', fontSize: '12px' }}
+                          />
+                          <Area type="monotone" dataKey="heart_rate_bpm" name="Heart Rate (BPM)" stroke="var(--accent)" fill="url(#hrGrad)" strokeWidth={2} />
+                          <Area type="monotone" dataKey="readiness_score" name="Readiness Score" stroke="#10b981" fill="url(#readyGrad)" strokeWidth={2} />
+                        </AreaChart>
+                      </ResponsiveContainer>
+                    </div>
+                  </div>
+                )}
+
+                {/* AI Flight Surgeon Countermeasure Co-Pilot */}
+                <div className="bg-slate-900/70 border border-slate-800 rounded-2xl p-4 space-y-3">
+                  <div className="flex items-center gap-2">
+                    <Sparkles className="w-4 h-4 text-cyan-400" />
+                    <h2 className="text-xs font-semibold uppercase tracking-wider text-cyan-400">
+                      Autonomous Countermeasure & Medical Protocol Engine
+                    </h2>
+                  </div>
+
+                  <div className="space-y-2.5">
+                    {aiAnalysis.recommendations.map((rec, idx) => (
+                      <div
+                        key={idx}
+                        className={`p-3 rounded-xl border flex items-start gap-3 ${
+                          rec.severity === 'critical'
+                            ? 'bg-rose-950/30 border-rose-500/40'
+                            : rec.severity === 'warning'
+                            ? 'bg-amber-950/30 border-amber-500/40'
+                            : 'bg-emerald-950/20 border-emerald-500/30'
+                        }`}
+                      >
+                        {rec.severity === 'optimal' ? (
+                          <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
+                        ) : (
+                          <AlertTriangle
+                            className={`w-5 h-5 shrink-0 mt-0.5 ${
+                              rec.severity === 'critical' ? 'text-rose-400' : 'text-amber-400'
+                            }`}
+                          />
+                        )}
+                        <div>
+                          <div className="flex items-center gap-2">
+                            <span className="text-xs font-bold text-white">{rec.title}</span>
+                            <span className="text-[10px] font-mono uppercase px-1.5 py-0.5 rounded bg-slate-800 text-slate-300">
+                              {rec.system}
+                            </span>
+                          </div>
+                          <p className="text-xs text-slate-300 mt-1 leading-relaxed">{rec.action}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
+            </div>
+
+            {/* Crew Tablet View: Priority Surgeon Directives + Self-Care & Ground Link */}
+            {viewMode === 'crew' && (
+              <>
+                {crewOrders.length > 0 && (
+                  <div className="rounded-2xl border border-amber-500/40 bg-amber-950/25 p-4 space-y-2">
+                    <div className="text-xs font-bold uppercase tracking-wider text-amber-300">
+                      Incoming Flight Surgeon Directives ({crewOrders.length})
+                    </div>
+                    {crewOrders.map((ord) => (
+                      <div key={ord.id} className="flex items-center justify-between gap-3 text-xs bg-slate-950/60 border border-amber-500/20 rounded-xl px-3 py-2">
+                        <span className="text-white font-medium">
+                          <b className="text-amber-300">[{ord.priority}]</b> {ord.text}
+                        </span>
+                        <button
+                          onClick={() => setDispatchedOrders((prev) => prev.filter((x) => x.id !== ord.id))}
+                          className="px-2.5 py-1 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-semibold whitespace-nowrap"
+                        >
+                          Acknowledge
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                <SelfCareHub
+                  key={selectedId}
+                  history={history}
+                  baseline={snapshotData[selectedId].history.slice(0, 12)}
+                  apiBase={API_BASE}
+                  onCheckIn={(p) => {
+                    setIsLive(false);
+                    setHistory((prev) => {
+                      const u = { ...prev[prev.length - 1], ...p };
+                      u.readiness_score = evaluateVitalsLocal(u).readiness_score;
+                      return [...prev.slice(0, -1), u];
+                    });
+                  }}
+                />
+              </>
             )}
 
-            <SelfCareHub
-              key={selectedId}
-              history={history}
-              baseline={snapshotData[selectedId].history.slice(0, 12)}
-              apiBase={API_BASE}
-              onCheckIn={(p) => {
-                setIsLive(false);
-                setHistory((prev) => {
-                  const u = { ...prev[prev.length - 1], ...p };
-                  u.readiness_score = evaluateVitalsLocal(u).readiness_score;
-                  return [...prev.slice(0, -1), u];
-                });
-              }}
-            />
+            {/* Flight Surgeon View: Multi-Crew Triage Matrix & Protocol Dispatcher */}
+            {viewMode === 'surgeon' && (
+              <SurgeonConsole
+                crewData={snapshotData}
+                selectedId={selectedId}
+                onSelectCrew={setSelectedId}
+                liveVitalsMap={liveVitalsMap}
+                evaluateFn={evaluateVitalsLocal}
+                evaWaivers={evaWaivers}
+                onToggleWaiver={(id) => setEvaWaivers((prev) => ({ ...prev, [id]: !prev[id] }))}
+                dispatchedOrders={dispatchedOrders}
+                onDispatchOrder={(ord) => setDispatchedOrders((prev) => [ord, ...prev])}
+              />
+            )}
           </>
         )}
-
-        {/* Flight Surgeon View: Multi-Crew Triage Matrix & Protocol Dispatcher */}
-        {viewMode === 'surgeon' && (
-          <SurgeonConsole
-            crewData={snapshotData}
-            selectedId={selectedId}
-            onSelectCrew={setSelectedId}
-            liveVitalsMap={liveVitalsMap}
-            evaluateFn={evaluateVitalsLocal}
-            evaWaivers={evaWaivers}
-            onToggleWaiver={(id) => setEvaWaivers((prev) => ({ ...prev, [id]: !prev[id] }))}
-            dispatchedOrders={dispatchedOrders}
-            onDispatchOrder={(ord) => setDispatchedOrders((prev) => [ord, ...prev])}
-          />
-        )}
       </main>
+
       {/* Flight Surgeon Clearance PIN Modal */}
       {showPinModal && (
         <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4 no-print">

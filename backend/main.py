@@ -1,12 +1,22 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
+from pathlib import Path
 import pandas as pd
 import numpy as np
 import joblib
 import os
 import time
 import httpx
+
+# Automatically load backend/.env if present
+env_path = Path(__file__).parent / ".env"
+if env_path.exists():
+    for line in env_path.read_text(encoding="utf-8").splitlines():
+        line = line.strip()
+        if line and not line.startswith("#") and "=" in line:
+            k, v = line.split("=", 1)
+            os.environ.setdefault(k.strip(), v.strip().strip('"').strip("'"))
 
 app = FastAPI(title="AstroPulse NASA Space Apps Telemetry & AI API", version="1.0.0")
 
@@ -91,7 +101,12 @@ def generate_recommendations(v: VitalsInput, readiness: int, is_anomaly: bool):
 
 @app.get("/api/health")
 def health_check():
-    return {"status": "online", "ml_loaded": models is not None, "records": len(telemetry_df)}
+    return {
+        "status": "online",
+        "ml_loaded": models is not None,
+        "gemini_configured": bool(os.getenv("GEMINI_API_KEY")),
+        "records": len(telemetry_df)
+    }
 
 @app.get("/api/crew")
 def get_crew_overview():
@@ -171,11 +186,15 @@ async def assistant(q: AskInput):
     key = os.getenv("GEMINI_API_KEY")
     if not key:
         return {"answer": None}
-    model = os.getenv("GEMINI_MODEL", "gemini-2.0-flash")
+    model = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
     body = {"contents": [{"parts": [{"text": f"{SYSTEM}\n\nReadings: {q.summary}\nQuestion: {q.question}"}]}]}
     try:
         async with httpx.AsyncClient(timeout=20) as c:
-            r = await c.post(f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={key}", json=body)
+            r = await c.post(
+                f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={key}",
+                json=body
+            )
+            r.raise_for_status()
         text = r.json()["candidates"][0]["content"]["parts"][0]["text"]
     except Exception:
         return {"answer": None}
@@ -185,7 +204,10 @@ async def assistant(q: AskInput):
 
 @app.post("/api/ground")
 def send_ground(m: GroundMsg):
-    d = m.model_dump(); d["eta"] = time.time() + m.delay_min * 60; ground.append(d); return d
+    d = m.model_dump()
+    d["eta"] = time.time() + m.delay_min * 60
+    ground.append(d)
+    return d
 
 @app.get("/api/ground")
 def get_ground():

@@ -27,7 +27,7 @@ Open `http://localhost:5173` in your browser. *(Note: The frontend includes an e
 cd backend
 pip install -r requirements.txt
 python train_model.py
-uvicorn main:app --reload --port 8000
+python -m uvicorn main:app --reload --port 8000
 ```
 Once running, the frontend automatically detects `http://localhost:8000` and displays `FastAPI ML Live` in the header.
 
