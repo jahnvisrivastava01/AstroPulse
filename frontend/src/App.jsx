@@ -32,6 +32,7 @@ import {
 import snapshotData from './data/telemetrySnapshot.json';
 import BodySystemMap from './components/BodySystemMap';
 import SelfCareHub from './components/SelfCareHub';
+import SurgeonConsole from './components/SurgeonConsole';
 
 const API_BASE = 'http://localhost:8000';
 
@@ -116,6 +117,9 @@ export default function App() {
   const [showPinModal, setShowPinModal] = useState(false);
   const [pinInput, setPinInput] = useState('');
   const [pinError, setPinError] = useState(false);
+  const [evaWaivers, setEvaWaivers] = useState({});
+  const [dispatchedOrders, setDispatchedOrders] = useState([]);
+  const [mlServerPrediction, setMlServerPrediction] = useState(null);
   const [isLive, setIsLive] = useState(true);
   const [activeEvent, setActiveEvent] = useState(null); // null | 'solar_flare' | 'eva_strain' | 'sleep_debt'
   const [backendConnected, setBackendConnected] = useState(false);
@@ -189,8 +193,47 @@ export default function App() {
     return () => clearInterval(timer);
   }, [isLive, activeEvent, selectedCrew]);
 
+  // Sync current vitals with Python FastAPI RandomForest + IsolationForest endpoint when live
+  useEffect(() => {
+    if (!backendConnected) {
+      setMlServerPrediction(null);
+      return;
+    }
+    const latest = history[history.length - 1];
+    fetch(`${API_BASE}/api/predict`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        astronaut_id: selectedId,
+        heart_rate_bpm: latest.heart_rate_bpm,
+        hrv_ms: latest.hrv_ms,
+        spo2_pct: latest.spo2_pct,
+        core_temp_c: latest.core_temp_c,
+        radiation_msv_hr: latest.radiation_msv_hr,
+        sleep_hours: latest.sleep_hours,
+        cabin_co2_mmhg: latest.cabin_co2_mmhg || 3.8
+      })
+    })
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => {
+        if (data) setMlServerPrediction(data);
+      })
+      .catch(() => {});
+  }, [backendConnected, history, selectedId]);
+
   const currentVitals = history[history.length - 1];
-  const aiAnalysis = useMemo(() => evaluateVitalsLocal(currentVitals), [currentVitals]);
+  const aiAnalysis = useMemo(() => {
+    const local = evaluateVitalsLocal(currentVitals);
+    if (mlServerPrediction && mlServerPrediction.astronaut_id === selectedId) {
+      return {
+        ...local,
+        readiness_score: mlServerPrediction.readiness_score,
+        status: mlServerPrediction.status,
+        anomaly_detected: mlServerPrediction.anomaly_detected
+      };
+    }
+    return local;
+  }, [currentVitals, mlServerPrediction, selectedId]);
 
   const triggerScenario = (scenario) => {
     setActiveEvent(scenario);
@@ -253,14 +296,28 @@ export default function App() {
   };
 
   const evaChecks = useMemo(() => {
+    const hasWaiver = Boolean(evaWaivers[selectedId]);
     const checks = [
       { label: 'Readiness >= 75%', pass: aiAnalysis.readiness_score >= 75, val: `${aiAnalysis.readiness_score}%` },
       { label: 'HRV >= 42 ms', pass: currentVitals.hrv_ms >= 42, val: `${currentVitals.hrv_ms} ms` },
       { label: 'Radiation < 1.2 mSv/h', pass: currentVitals.radiation_msv_hr < 1.2, val: `${currentVitals.radiation_msv_hr}` },
       { label: 'Sleep >= 6.0 hrs', pass: currentVitals.sleep_hours >= 6.0, val: `${currentVitals.sleep_hours}h` },
     ];
-    return { checks, cleared: checks.every((c) => c.pass) };
-  }, [aiAnalysis.readiness_score, currentVitals]);
+    return { checks, hasWaiver, cleared: hasWaiver || checks.every((c) => c.pass) };
+  }, [aiAnalysis.readiness_score, currentVitals, evaWaivers, selectedId]);
+
+  const liveVitalsMap = useMemo(() => {
+    const map = {};
+    crewIds.forEach((id) => {
+      map[id] = id === selectedId ? currentVitals : snapshotData[id].history[snapshotData[id].history.length - 1];
+    });
+    return map;
+  }, [crewIds, selectedId, currentVitals]);
+
+  const crewOrders = useMemo(
+    () => dispatchedOrders.filter((o) => o.crewId === selectedId),
+    [dispatchedOrders, selectedId]
+  );
 
   const statusColor =
     aiAnalysis.status === 'CRITICAL'
@@ -494,7 +551,7 @@ export default function App() {
                     Pre-Spacewalk Airlock Gate
                   </div>
                   <div className={`text-sm font-bold ${evaChecks.cleared ? 'text-emerald-300' : 'text-rose-300'}`}>
-                    {evaChecks.cleared ? 'GO — CLEARED FOR EVA' : 'NO-GO — EVA AIRLOCK HOLD'}
+                    {evaChecks.hasWaiver ? 'GO — FLIGHT SURGEON WAIVER ACTIVE' : evaChecks.cleared ? 'GO — CLEARED FOR EVA' : 'NO-GO — EVA AIRLOCK HOLD'}
                   </div>
                 </div>
               </div>
@@ -647,20 +704,61 @@ export default function App() {
             </div>
           </div>
         </div>
-        <SelfCareHub
-          key={selectedId}
-          history={history}
-          baseline={snapshotData[selectedId].history.slice(0, 12)}
-          apiBase={API_BASE}
-          onCheckIn={(p) => {
-            setIsLive(false);
-            setHistory((prev) => {
-              const u = { ...prev[prev.length - 1], ...p };
-              u.readiness_score = evaluateVitalsLocal(u).readiness_score;
-              return [...prev.slice(0, -1), u];
-            });
-          }}
-        />
+        {/* Crew Tablet View: Priority Surgeon Directives + Self-Care & Ground Link */}
+        {viewMode === 'crew' && (
+          <>
+            {crewOrders.length > 0 && (
+              <div className="rounded-2xl border border-amber-500/40 bg-amber-950/25 p-4 space-y-2">
+                <div className="text-xs font-bold uppercase tracking-wider text-amber-300">
+                  Incoming Flight Surgeon Directives ({crewOrders.length})
+                </div>
+                {crewOrders.map((ord) => (
+                  <div key={ord.id} className="flex items-center justify-between gap-3 text-xs bg-slate-950/60 border border-amber-500/20 rounded-xl px-3 py-2">
+                    <span className="text-white font-medium">
+                      <b className="text-amber-300">[{ord.priority}]</b> {ord.text}
+                    </span>
+                    <button
+                      onClick={() => setDispatchedOrders((prev) => prev.filter((x) => x.id !== ord.id))}
+                      className="px-2.5 py-1 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-semibold whitespace-nowrap"
+                    >
+                      Acknowledge
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            <SelfCareHub
+              key={selectedId}
+              history={history}
+              baseline={snapshotData[selectedId].history.slice(0, 12)}
+              apiBase={API_BASE}
+              onCheckIn={(p) => {
+                setIsLive(false);
+                setHistory((prev) => {
+                  const u = { ...prev[prev.length - 1], ...p };
+                  u.readiness_score = evaluateVitalsLocal(u).readiness_score;
+                  return [...prev.slice(0, -1), u];
+                });
+              }}
+            />
+          </>
+        )}
+
+        {/* Flight Surgeon View: Multi-Crew Triage Matrix & Protocol Dispatcher */}
+        {viewMode === 'surgeon' && (
+          <SurgeonConsole
+            crewData={snapshotData}
+            selectedId={selectedId}
+            onSelectCrew={setSelectedId}
+            liveVitalsMap={liveVitalsMap}
+            evaluateFn={evaluateVitalsLocal}
+            evaWaivers={evaWaivers}
+            onToggleWaiver={(id) => setEvaWaivers((prev) => ({ ...prev, [id]: !prev[id] }))}
+            dispatchedOrders={dispatchedOrders}
+            onDispatchOrder={(ord) => setDispatchedOrders((prev) => [ord, ...prev])}
+          />
+        )}
       </main>
       {/* Flight Surgeon Clearance PIN Modal */}
       {showPinModal && (
