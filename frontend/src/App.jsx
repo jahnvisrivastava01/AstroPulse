@@ -36,7 +36,7 @@ import SelfCareHub from './components/SelfCareHub';
 import SurgeonConsole from './components/SurgeonConsole';
 import MissionBrief from './components/MissionBrief';
 
-const API_BASE = 'http://localhost:8000';
+const API_BASE = (import.meta.env.VITE_API_URL || 'http://localhost:8000').replace(/\/$/, '');
 
 // Local ML-equivalent scoring engine so the app works 100% standalone or with FastAPI
 function evaluateVitalsLocal(v) {
@@ -330,34 +330,35 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[var(--bg)] text-slate-100 flex flex-col">
-      {/* Top Mission Control Bar (Compact text-xs sizing preserved) */}
+      {/* Top Mission Control Bar (Locked Single-Row) */}
       <header className="border-b border-slate-800/90 bg-slate-950/80 backdrop-blur-md sticky top-0 z-30">
-        <div className="w-full px-6 lg:px-8 py-3 flex flex-wrap items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-400/30 flex items-center justify-center text-cyan-400">
-              <Activity className="w-6 h-6" />
+        <div className="w-full px-4 lg:px-6 py-2.5 flex flex-wrap xl:flex-nowrap items-center justify-between gap-2.5">
+          {/* Brand */}
+          <div className="flex items-center gap-2.5 shrink-0">
+            <div className="w-9 h-9 rounded-xl bg-cyan-500/10 border border-cyan-400/30 flex items-center justify-center text-cyan-400 shrink-0">
+              <Activity className="w-5 h-5" />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h1 className="font-bold text-lg tracking-tight text-white">
-                  ASTROPULSE <span className="text-rose-500 font-mono text-sm">// ARTEMIS-IV</span>
+                <h1 className="font-bold text-base tracking-tight text-white whitespace-nowrap">
+                  ASTROPULSE <span className="text-rose-500 font-mono text-xs">// ARTEMIS-IV</span>
                 </h1>
-                <span className="text-[10px] uppercase tracking-widest px-2 py-0.5 rounded bg-cyan-500/10 text-cyan-300 border border-cyan-500/30">
+                <span className="text-[10px] uppercase tracking-wider px-2 py-0.5 rounded bg-cyan-500/10 text-cyan-300 border border-cyan-500/30 whitespace-nowrap">
                   {backendConnected ? 'FastAPI ML Live' : 'Edge AI Telemetry'}
                 </span>
               </div>
-              <p className="text-xs text-slate-400">
+              <p className="text-xs text-slate-400 whitespace-nowrap">
                 Autonomous Crew Biometric & Predictive Readiness Monitor
               </p>
             </div>
           </div>
 
-          {/* Interactive Scenario Triggers for Live Demo */}
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="text-xs text-slate-400 mr-1 hidden sm:inline">Simulate Event:</span>
+          {/* Interactive Scenario Triggers */}
+          <div className="flex items-center gap-1.5 shrink-0">
+            <span className="text-xs text-slate-400 mr-0.5 hidden 2xl:inline whitespace-nowrap">Simulate Event:</span>
             <button
               onClick={() => triggerScenario('solar_flare')}
-              className={`px-3 py-1.5 rounded-lg text-xs font-medium flex items-center gap-1.5 border transition ${
+              className={`px-2.5 py-1.5 rounded-lg text-xs font-medium flex items-center gap-1 border transition whitespace-nowrap ${
                 activeEvent === 'solar_flare'
                   ? 'bg-rose-600 text-white border-rose-400 shadow-lg shadow-rose-500/20'
                   : 'bg-slate-900 hover:bg-slate-800 text-rose-300 border-rose-500/30'
@@ -367,7 +368,7 @@ export default function App() {
             </button>
             <button
               onClick={() => triggerScenario('eva_strain')}
-              className={`px-3 py-1.5 rounded-lg text-xs font-medium flex items-center gap-1.5 border transition ${
+              className={`px-2.5 py-1.5 rounded-lg text-xs font-medium flex items-center gap-1 border transition whitespace-nowrap ${
                 activeEvent === 'eva_strain'
                   ? 'bg-amber-600 text-white border-amber-400 shadow-lg shadow-amber-500/20'
                   : 'bg-slate-900 hover:bg-slate-800 text-amber-300 border-amber-500/30'
@@ -377,7 +378,7 @@ export default function App() {
             </button>
             <button
               onClick={() => triggerScenario('sleep_debt')}
-              className={`px-3 py-1.5 rounded-lg text-xs font-medium flex items-center gap-1.5 border transition ${
+              className={`px-2.5 py-1.5 rounded-lg text-xs font-medium flex items-center gap-1 border transition whitespace-nowrap ${
                 activeEvent === 'sleep_debt'
                   ? 'bg-indigo-600 text-white border-indigo-400'
                   : 'bg-slate-900 hover:bg-slate-800 text-indigo-300 border-indigo-500/30'
@@ -388,35 +389,35 @@ export default function App() {
             {activeEvent && (
               <button
                 onClick={() => triggerScenario(null)}
-                className="px-2.5 py-1.5 rounded-lg text-xs font-medium bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 flex items-center gap-1"
+                className="px-2 py-1.5 rounded-lg text-xs font-medium bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 flex items-center gap-1 whitespace-nowrap"
               >
                 <RotateCcw className="w-3.5 h-3.5" /> Nominal
               </button>
             )}
           </div>
 
-          <button
-            onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-            className="px-3 py-1.5 rounded-lg text-xs font-medium border border-slate-700 bg-slate-900 text-slate-300 hover:text-white"
-          >
-            {theme === 'dark' ? 'Light mode' : 'Dark mode'}
-          </button>
+          {/* Right Controls: Theme + PDF + Mode Switcher */}
+          <div className="flex items-center gap-2 shrink-0">
+            <button
+              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+              className="px-2.5 py-1.5 rounded-lg text-xs font-medium border border-slate-700 bg-slate-900 text-slate-300 hover:text-white whitespace-nowrap"
+            >
+              {theme === 'dark' ? 'Light mode' : 'Dark mode'}
+            </button>
 
-          {/* Handover PDF Export + PIN-Protected Role & Mission Brief Toggle */}
-          <div className="flex items-center gap-2">
             <button
               onClick={() => window.print()}
               title="Export Flight Surgeon Handover / MedEvac PDF"
-              className="px-2.5 py-1.5 rounded-lg text-xs font-medium border border-slate-700 bg-slate-900 text-slate-300 hover:text-white flex items-center gap-1.5"
+              className="px-2.5 py-1.5 rounded-lg text-xs font-medium border border-slate-700 bg-slate-900 text-slate-300 hover:text-white flex items-center gap-1.5 whitespace-nowrap"
             >
               <Printer className="w-3.5 h-3.5 text-cyan-400" />
               <span className="hidden md:inline">Handover PDF</span>
             </button>
 
-            <div className="flex items-center bg-slate-900 p-1 rounded-xl border border-slate-800">
+            <div className="flex items-center bg-slate-900 p-1 rounded-xl border border-slate-800 shrink-0">
               <button
                 onClick={() => handleModeSwitch('crew')}
-                className={`px-3 py-1 rounded-lg text-xs font-medium transition ${
+                className={`px-2.5 py-1 rounded-lg text-xs font-medium transition whitespace-nowrap ${
                   viewMode === 'crew' ? 'bg-cyan-500 text-slate-950 font-semibold' : 'text-slate-400 hover:text-white'
                 }`}
               >
@@ -424,7 +425,7 @@ export default function App() {
               </button>
               <button
                 onClick={() => handleModeSwitch('surgeon')}
-                className={`px-3 py-1 rounded-lg text-xs font-medium transition flex items-center gap-1 ${
+                className={`px-2.5 py-1 rounded-lg text-xs font-medium transition flex items-center gap-1 whitespace-nowrap ${
                   viewMode === 'surgeon' ? 'bg-cyan-500 text-slate-950 font-semibold' : 'text-slate-400 hover:text-white'
                 }`}
               >
@@ -435,14 +436,14 @@ export default function App() {
                 <button
                   onClick={lockSurgeonConsole}
                   title="Lock Flight Surgeon Console"
-                  className="ml-1 px-2 py-1 rounded-lg text-[10px] font-mono text-rose-300 hover:bg-rose-500/20"
+                  className="ml-1 px-2 py-1 rounded-lg text-[10px] font-mono text-rose-300 hover:bg-rose-500/20 whitespace-nowrap"
                 >
                   Lock
                 </button>
               )}
               <button
                 onClick={() => handleModeSwitch('about')}
-                className={`px-3 py-1 rounded-lg text-xs font-medium transition flex items-center gap-1 ${
+                className={`px-2.5 py-1 rounded-lg text-xs font-medium transition flex items-center gap-1 whitespace-nowrap ${
                   viewMode === 'about' ? 'bg-cyan-500 text-slate-950 font-semibold' : 'text-slate-400 hover:text-white'
                 }`}
               >
