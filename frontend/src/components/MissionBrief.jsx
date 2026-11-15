@@ -8,7 +8,10 @@ import {
   Sparkles,
   AlertCircle,
   CheckCircle2,
-  Layers
+  Layers,
+  Zap,
+  Moon,
+  ArrowRight
 } from 'lucide-react';
 
 export default function MissionBrief({ onLaunchConsole }) {
@@ -43,12 +46,64 @@ export default function MissionBrief({ onLaunchConsole }) {
     { hazard: 'Hostile Closed Environment', vitals: 'Blood Oxygen SpO2 (%), Core Temp (°C), Cabin CO2', response: 'CDRA CO2 scrubber check & suit LCVG cooling boost' }
   ];
 
+  const simulations = [
+    {
+      icon: <Radio className="w-5 h-5 text-rose-400" />,
+      name: 'Solar Flare (SPE Flux Spike)',
+      accent: 'border-rose-500/30 bg-rose-950/15 hover:border-rose-400/60',
+      triggers: 'Radiation flux spikes to ~4.4 mSv/hr; elevated heart rate & suppressed HRV.',
+      response: 'Highlights Radiation Shielding on the Digital Twin, locks EVA Airlock Gate to NO-GO, and orders immediate water-wall storm shelter relocation.'
+    },
+    {
+      icon: <Zap className="w-5 h-5 text-amber-400" />,
+      name: 'EVA Exhaustion (Thermal & Cardiac Strain)',
+      accent: 'border-amber-500/30 bg-amber-950/15 hover:border-amber-400/60',
+      triggers: 'Heart rate surges to ~132 bpm, HRV drops to ~29 ms, SpO2 dips to ~94.1%, and core temp rises to 38.2°C.',
+      response: 'Flags Cardiovascular, Respiratory, and Thermoregulation systems; triggers MAX LCVG suit cooling, CO2 scrubber check, and paced recovery.'
+    },
+    {
+      icon: <Moon className="w-5 h-5 text-indigo-400" />,
+      name: 'Circadian Drift (Cumulative Sleep Debt)',
+      accent: 'border-indigo-500/30 bg-indigo-950/15 hover:border-indigo-400/60',
+      triggers: '24h sleep drops to ~4.3 hrs alongside elevated resting HR and reduced HRV.',
+      response: 'Flags Circadian & Neurocognitive strain, shifts cabin lighting to warm 2700K spectrum, and defers high-precision robotic or EVA tasks.'
+    }
+  ];
+
+  const pipelineSteps = [
+    { step: '01 // TELEMETRY & VOICE', title: 'Multi-Sensor + Web Speech', desc: 'Streams 6 vital channels + hands-free crew voice check-ins every 2.5s.', color: 'text-cyan-400' },
+    { step: '02 // ML & DRIFT ENGINE', title: 'FastAPI + Edge Scoring', desc: 'Random Forest readiness + Isolation Forest anomaly detection + 2 SD personal drift.', color: 'text-emerald-400' },
+    { step: '03 // GUARDRAILED AI', title: 'Gemini + Local Fallback', desc: 'Non-diagnostic NASA self-care guidance with automatic offline rule-engine failover.', color: 'text-amber-400' },
+    { step: '04 // COMMAND & HANDOVER', title: 'Surgeon Console & PDF', desc: 'PIN-locked fleet triage, EVA waivers, crew directives & printable MedEvac summary.', color: 'text-rose-400' }
+  ];
+
   return (
     <section className="w-full space-y-6 pt-2 text-left">
+      <style>{`
+        @keyframes briefFadeUp {
+          from { opacity: 0; transform: translateY(10px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes telemetryPulse {
+          0% { transform: translateX(-100%); }
+          100% { transform: translateX(400%); }
+        }
+        .brief-enter {
+          opacity: 0;
+          animation: briefFadeUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        .telemetry-beam {
+          animation: telemetryPulse 3.2s linear infinite;
+        }
+      `}</style>
+
       {/* Hero Overview Card */}
-      <div className="rounded-2xl border border-slate-800 bg-slate-900/75 p-6 space-y-4">
+      <div
+        style={{ animationDelay: '0ms' }}
+        className="brief-enter rounded-2xl border border-slate-800 bg-slate-900/75 p-6 space-y-4 relative overflow-hidden"
+      >
         <div className="flex flex-wrap items-center justify-between gap-4">
-          <div className="space-y-1.5">
+          <div className="space-y-2">
             <div className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-wider px-2.5 py-1 rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/30">
               <Rocket className="w-3.5 h-3.5" /> NASA Space Apps Challenge 2026 // Mission Brief
             </div>
@@ -62,82 +117,134 @@ export default function MissionBrief({ onLaunchConsole }) {
 
           <button
             onClick={onLaunchConsole}
-            className="px-4 py-2.5 rounded-xl bg-cyan-500 text-slate-950 font-bold text-xs uppercase tracking-wider hover:opacity-90 transition shrink-0"
+            className="group px-4 py-2.5 rounded-xl bg-cyan-500 text-slate-950 font-bold text-xs uppercase tracking-wider hover:opacity-95 transition flex items-center gap-1.5 shrink-0"
           >
-            Back to Live Telemetry →
+            Back to Live Telemetry
+            <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
           </button>
         </div>
       </div>
 
       {/* 4 Core Capabilities Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div
+        style={{ animationDelay: '70ms' }}
+        className="brief-enter grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"
+      >
         {pillars.map((item) => (
-          <div key={item.title} className="rounded-2xl border border-slate-800 bg-slate-900/60 p-5 space-y-2">
+          <div
+            key={item.title}
+            className="rounded-2xl border border-slate-800 bg-slate-900/60 p-5 space-y-2.5 transition-all duration-200 hover:-translate-y-0.5 hover:border-cyan-500/40 hover:shadow-[0_8px_24px_rgba(6,182,212,0.08)]"
+          >
             <div className="flex items-center gap-2.5">
               {item.icon}
-              <h3 className="font-bold text-sm text-white">{item.title}</h3>
+              <h3 className="font-bold text-base text-white">{item.title}</h3>
             </div>
-            <p className="text-xs text-slate-300 leading-relaxed">{item.desc}</p>
+            <p className="text-sm text-slate-300 leading-relaxed">{item.desc}</p>
           </div>
         ))}
       </div>
 
-      {/* System Architecture Pipeline */}
-      <div className="rounded-2xl border border-slate-800 bg-slate-900/70 p-6 space-y-4">
-        <div className="flex items-center gap-2">
-          <Layers className="w-4 h-4 text-cyan-400" />
-          <h3 className="font-bold text-xs uppercase tracking-wider text-white">
-            End-to-End System Architecture & Fail-Safe Flow
-          </h3>
+      {/* System Architecture Pipeline with Live Signal Sweep */}
+      <div
+        style={{ animationDelay: '140ms' }}
+        className="brief-enter rounded-2xl border border-slate-800 bg-slate-900/70 p-6 space-y-4 overflow-hidden"
+      >
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <Layers className="w-4 h-4 text-cyan-400" />
+            <h3 className="font-bold text-sm uppercase tracking-wider text-white">
+              End-to-End System Architecture & Fail-Safe Flow
+            </h3>
+          </div>
+          <span className="text-xs font-mono text-emerald-400 flex items-center gap-1.5">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
+            EDGE-RESILIENT PIPELINE
+          </span>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
-          <div className="p-3.5 rounded-xl border border-slate-800 bg-slate-950/70 space-y-1">
-            <div className="font-mono text-[11px] text-cyan-400">01 // TELEMETRY & VOICE</div>
-            <div className="font-semibold text-white">Multi-Sensor + Web Speech</div>
-            <p className="text-slate-400 text-[11px]">Streams 6 vital channels + hands-free crew voice check-ins every 2.5s.</p>
+        {/* Subtle animated telemetry sweep bar */}
+        <div className="h-0.5 w-full bg-slate-800 rounded-full overflow-hidden">
+          <div className="h-full w-1/4 bg-gradient-to-r from-transparent via-cyan-400 to-transparent telemetry-beam" />
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
+          {pipelineSteps.map((node) => (
+            <div
+              key={node.step}
+              className="p-4 rounded-xl border border-slate-800 bg-slate-950/70 space-y-1.5 transition-colors hover:border-slate-700"
+            >
+              <div className={`font-mono text-xs ${node.color}`}>{node.step}</div>
+              <div className="font-bold text-base text-white">{node.title}</div>
+              <p className="text-slate-400 text-sm leading-relaxed">{node.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Simulated Emergency Scenarios Breakdown */}
+      <div
+        style={{ animationDelay: '210ms' }}
+        className="brief-enter rounded-2xl border border-slate-800 bg-slate-900/70 p-6 space-y-4"
+      >
+        <div className="flex items-center justify-between flex-wrap gap-2">
+          <div className="flex items-center gap-2">
+            <Zap className="w-4 h-4 text-amber-400" />
+            <h3 className="font-bold text-sm uppercase tracking-wider text-white">
+              Interactive Event Simulations (Top Mission Bar)
+            </h3>
           </div>
-          <div className="p-3.5 rounded-xl border border-slate-800 bg-slate-950/70 space-y-1">
-            <div className="font-mono text-[11px] text-emerald-400">02 // ML & DRIFT ENGINE</div>
-            <div className="font-semibold text-white">FastAPI + Edge Scoring</div>
-            <p className="text-slate-400 text-[11px]">Random Forest readiness + Isolation Forest anomaly detection + 2 SD personal drift.</p>
-          </div>
-          <div className="p-3.5 rounded-xl border border-slate-800 bg-slate-950/70 space-y-1">
-            <div className="font-mono text-[11px] text-amber-400">03 // GUARDRAILED AI</div>
-            <div className="font-semibold text-white">Gemini + Local Fallback</div>
-            <p className="text-slate-400 text-[11px]">Non-diagnostic NASA self-care guidance with automatic offline rule-engine failover.</p>
-          </div>
-          <div className="p-3.5 rounded-xl border border-slate-800 bg-slate-950/70 space-y-1">
-            <div className="font-mono text-[11px] text-rose-400">04 // COMMAND & HANDOVER</div>
-            <div className="font-semibold text-white">Surgeon Console & PDF</div>
-            <p className="text-slate-400 text-[11px]">PIN-locked fleet triage, EVA waivers, crew directives & printable MedEvac summary.</p>
-          </div>
+          <span className="text-xs font-mono text-slate-400">
+            Click &ldquo;Nominal&rdquo; in the top bar anytime to restore baseline vitals
+          </span>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {simulations.map((sim) => (
+            <div
+              key={sim.name}
+              className={`rounded-xl border p-4 space-y-2 transition-all duration-200 hover:-translate-y-0.5 ${sim.accent}`}
+            >
+              <div className="flex items-center gap-2">
+                {sim.icon}
+                <h4 className="font-bold text-base text-white">{sim.name}</h4>
+              </div>
+              <p className="text-sm text-slate-300 leading-relaxed">
+                <b className="text-slate-200">Telemetry Shift:</b> {sim.triggers}
+              </p>
+              <p className="text-sm text-slate-400 leading-relaxed">
+                <b className="text-slate-200">System Response:</b> {sim.response}
+              </p>
+            </div>
+          ))}
         </div>
       </div>
 
       {/* NASA HRP 5 Hazards Mapping Table */}
-      <div className="rounded-2xl border border-slate-800 bg-slate-900/70 p-6 space-y-3">
+      <div
+        style={{ animationDelay: '280ms' }}
+        className="brief-enter rounded-2xl border border-slate-800 bg-slate-900/70 p-6 space-y-3"
+      >
         <div className="flex items-center gap-2">
           <Sparkles className="w-4 h-4 text-cyan-400" />
-          <h3 className="font-bold text-xs uppercase tracking-wider text-white">
+          <h3 className="font-bold text-sm uppercase tracking-wider text-white">
             Alignment with NASA Human Research Program (HRP) 5 Spaceflight Hazards
           </h3>
         </div>
         <div className="overflow-x-auto">
-          <table className="w-full text-left border-collapse text-xs">
+          <table className="w-full text-left border-collapse">
             <thead>
-              <tr className="border-b border-slate-800 text-slate-400 uppercase text-[11px]">
-                <th className="py-2.5 px-3">NASA HRP Hazard</th>
-                <th className="py-2.5 px-3">Monitored Telemetry Inputs</th>
-                <th className="py-2.5 px-3">Autonomous Countermeasure</th>
+              <tr className="border-b border-slate-800 text-slate-400 uppercase text-xs">
+                <th className="py-3 px-3">NASA HRP Hazard</th>
+                <th className="py-3 px-3">Monitored Telemetry Inputs</th>
+                <th className="py-3 px-3">Autonomous Countermeasure</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-800/70">
               {hrpHazards.map((row) => (
-                <tr key={row.hazard}>
-                  <td className="py-2.5 px-3 font-semibold text-white">{row.hazard}</td>
-                  <td className="py-2.5 px-3 text-slate-300 font-mono text-[11px]">{row.vitals}</td>
-                  <td className="py-2.5 px-3 text-slate-300">{row.response}</td>
+                <tr key={row.hazard} className="transition-colors hover:bg-slate-800/30">
+                  <td className="py-3 px-3 font-bold text-base text-white">{row.hazard}</td>
+                  <td className="py-3 px-3 text-slate-300 font-mono text-sm">{row.vitals}</td>
+                  <td className="py-3 px-3 text-slate-300 text-sm">{row.response}</td>
                 </tr>
               ))}
             </tbody>
@@ -146,26 +253,29 @@ export default function MissionBrief({ onLaunchConsole }) {
       </div>
 
       {/* Quick Judge Walkthrough & Honest Scientific Notes */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-        <div className="rounded-2xl border border-slate-800 bg-slate-900/70 p-5 space-y-2.5">
+      <div
+        style={{ animationDelay: '350ms' }}
+        className="brief-enter grid grid-cols-1 lg:grid-cols-2 gap-4"
+      >
+        <div className="rounded-2xl border border-slate-800 bg-slate-900/70 p-5 space-y-3">
           <div className="flex items-center gap-2 text-emerald-400">
-            <CheckCircle2 className="w-4 h-4" />
-            <h3 className="font-bold text-xs uppercase tracking-wider text-white">60-Second Judge Walkthrough</h3>
+            <CheckCircle2 className="w-5 h-5" />
+            <h3 className="font-bold text-base uppercase tracking-wider text-white">60-Second Judge Walkthrough</h3>
           </div>
-          <ol className="list-decimal list-inside space-y-1.5 text-xs text-slate-300 leading-relaxed">
+          <ol className="list-decimal list-inside space-y-2 text-sm text-slate-300 leading-relaxed">
             <li>Inspect <b>Crew Tablet</b> mode: test <b>Voice Check-In</b>, ask the <b>On-board Assistant</b>, and send a 12-min Mars <b>Ground Link</b> report.</li>
-            <li>Trigger <b>Solar Flare</b> or <b>EVA Exhaustion</b> in the top bar to watch the Digital Twin highlight affected organs and flip the Airlock Gate to <b>NO-GO</b>.</li>
+            <li>Trigger <b>Solar Flare</b>, <b>EVA Exhaustion</b>, or <b>Circadian Drift</b> in the top bar to watch the Digital Twin highlight affected organs and flip the Airlock Gate to <b>NO-GO</b>.</li>
             <li>Switch to <b>Flight Surgeon</b> mode (Demo PIN: <code className="font-mono text-cyan-400">1969</code>) to rank fleet risk, issue an <b>EVA Waiver</b>, or dispatch a crew directive.</li>
             <li>Click <b>Handover PDF</b> in the top bar to export a clean medical handover report.</li>
           </ol>
         </div>
 
-        <div className="rounded-2xl border border-slate-800 bg-slate-900/70 p-5 space-y-2.5">
+        <div className="rounded-2xl border border-slate-800 bg-slate-900/70 p-5 space-y-3">
           <div className="flex items-center gap-2 text-amber-400">
-            <AlertCircle className="w-4 h-4" />
-            <h3 className="font-bold text-xs uppercase tracking-wider text-white">Scientific Transparency & Scope Notes</h3>
+            <AlertCircle className="w-5 h-5" />
+            <h3 className="font-bold text-base uppercase tracking-wider text-white">Scientific Transparency & Scope Notes</h3>
           </div>
-          <ul className="list-disc list-inside space-y-1.5 text-xs text-slate-300 leading-relaxed">
+          <ul className="list-disc list-inside space-y-2 text-sm text-slate-300 leading-relaxed">
             <li><b>Synthetic Mission Dataset:</b> Because real astronaut biometric records are private medical data, our 30-day training dataset is synthetically generated using NASA physiological reference ranges.</li>
             <li><b>Retrain-Ready ML Pipeline:</b> The Random Forest regressor approximates our physiological readiness scoring model, while Isolation Forest detects unsupervised anomalies—ready to retrain directly on real flight data.</li>
             <li><b>Decision-Support Only:</b> Reference ranges are simplified for demonstration and provide wellness countermeasures, not clinical diagnosis.</li>
