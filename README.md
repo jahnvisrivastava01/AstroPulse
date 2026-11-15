@@ -1,6 +1,6 @@
 # AstroPulse — Autonomous Crew Health & Readiness Monitoring System
 **NASA Space Apps Challenge 2026 Submission — "Create Health Monitoring Software for Astronauts on Space Missions"**  
-**Team:** Team Jahnvi · **Submitted by:** Jahnvi Srivastava
+**Team:** Jahnvi · **Submitted by:** Jahnvi Srivastava
 
 AstroPulse is a full-stack, AI-assisted biometric telemetry platform designed for deep-space missions (Artemis / Mars transit) where Earth communication latency (up to 24 minutes each way) requires autonomous onboard crew health monitoring.
 
