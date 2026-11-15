@@ -49,3 +49,6 @@ Telemetry is synthetic and the readiness labels come from a formula, so the Rand
 
 ## Layout and font
 Content is left-aligned and full-width (no centered container). Font: Google Sans, bundled via `@fontsource/google-sans` so it also works offline.
+
+
+*Team Jahnvi · Submitted by **Jahnvi Srivastava** · 2026*
